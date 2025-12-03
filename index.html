@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Demo Theme + Responsive Tabbar</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- LINK CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="">
+    <!-- header -->
+    <header class="main-header">
+      <img src="photp/logo.jpg" alt="Giáo xứ An Ngãi" class="header-logo" />
+      <div class="header-text">GIÁO XỨ AN NGÃI</div>
+    </header>
+    <div class="container">
+      <!-- pages -->
+      <section id="home" class="page active">
+        <h1 class="page-title">Trang Chủ</h1>
+
+        <div class="card-grid">
+          <div class="home-card" onclick="openDetail('Khối Kinh Thánh')">
+            <div class="home-card-inner">
+              <img src="photp/logojpg" alt="Kinh Thánh" />
+              <h3>Khối Kinh Thánh</h3>
+              <p>Học hỏi Lời Chúa...</p>
+            </div>
+          </div>
+
+          <div class="home-card" onclick="openDetail('Khối Phụng Vụ')">
+            <div class="home-card-inner">
+              <img src="photp/logojpg" alt="Phụng Vụ" />
+              <h3>Khối Phụng Vụ</h3>
+              <p>Ôn tập kiến thức Phụng Vụ...</p>
+            </div>
+          </div>
+
+          <div class="home-card" onclick="openDetail('Khối Thêm Sức')">
+            <div class="home-card-inner">
+              <img src="photp/logojpg" alt="Thêm Sức" />
+              <h3>Khối Thêm Sức</h3>
+              <p>Chuẩn bị lãnh nhận Bí Tích...</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Các khối -->
+      <section id="kinhthanh" class="page"></section>
+      <section id="phungvu" class="page"></section>
+      <section id="themsuc" class="page"></section>
+      <section id="ontap" class="page"></section>
+
+      <section id="contact" class="page">
+        <div class="card">
+          <h2>Liên hệ</h2>
+          <p>Email: contact@example.com</p>
+          <p>SĐT: 0123 456 789</p>
+        </div>
+      </section>
+
+      <section id="settings" class="page">
+        <div class="card">
+          <h2>Cài đặt</h2>
+          <h3>🎨 Giao diện</h3>
+          <div class="themes">
+            <button class="theme-chip" onclick="setTheme('')">Light</button>
+            <button class="theme-chip" onclick="setTheme('theme-dark')">
+              Dark
+            </button>
+            <button class="theme-chip" onclick="setTheme('theme-blue')">
+              Blue
+            </button>
+            <button class="theme-chip" onclick="setTheme('theme-purple')">
+              Purple
+            </button>
+          </div>
+
+          <h3 style="margin-top:20px;">🔤 Cỡ chữ</h3>
+          <div class="themes">
+            <button class="theme-chip" onclick="setFont('small')">Nhỏ</button>
+            <button class="theme-chip" onclick="setFont('medium')">
+              Trung bình
+            </button>
+            <button class="theme-chip" onclick="setFont('large')">Lớn</button>
+            <button class="theme-chip" onclick="autoFont()">Tự động</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- MODAL -->
+    <div id="modal" class="modal" aria-hidden="true">
+      <div class="modal-box">
+        <div
+          style="display:flex;justify-content:space-between;align-items:center"
+        >
+          <h2>Đăng nhập</h2>
+          <div class="close-x" onclick="toggleModal(false)">✕</div>
+        </div>
+
+        <div class="form-row">
+          <input id="username" type="text" placeholder="Tên đăng nhập" />
+          <input id="password" type="password" placeholder="Mật khẩu" />
+          <button class="btn" onclick="login()">Đăng nhập</button>
+          <p id="message" class="message"></p>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL USER INFO -->
+    <div id="modal-user" class="modal" aria-hidden="true">
+      <div class="modal-box">
+        <div
+          style="display:flex;justify-content:space-between;align-items:center"
+        >
+          <h2>Thông tin cá nhân</h2>
+          <div class="close-x" onclick="toggleUserModal(false)">✕</div>
+        </div>
+
+        <div class="user-info">
+          <p id="user-fullname"></p>
+          <p id="user-username"></p>
+          <p>Email: <span id="user-email">user@example.com</span></p>
+          <button class="btn" onclick="logout()">Đăng xuất</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABBAR -->
+    <nav class="tabbar">
+      <button
+        class="tab-item active"
+        data-target="home"
+        onclick="switchTab(event)"
+      >
+        <span class="icon">🏠</span><span class="label">Home</span>
+      </button>
+
+      <button class="tab-item" id="tab-login" onclick="toggleModal(true)">
+        <span class="icon">🔐</span><span class="label">Login</span>
+      </button>
+
+      <button
+        class="tab-item"
+        data-target="settings"
+        onclick="switchTab(event)"
+      >
+        <span class="icon">⚙️</span><span class="label">Cài đặt</span>
+      </button>
+
+      <button class="tab-item" data-target="contact" onclick="switchTab(event)">
+        <span class="icon">📞</span><span class="label">Liên hệ</span>
+      </button>
+    </nav>
+
+    <!-- LINK JS -->
+    <script src="login/script.js"></script>
+    <script src="script.js"></script>
+    <script src="phungvu/phungvu.js"></script>
+  </body>
+</html>
