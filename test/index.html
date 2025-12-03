@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>KHỐI PHỤNG VỤ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- TailwindCSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Flowbite -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flowbite@1.7.1/dist/flowbite.min.css"
+    />
+    <link rel="icon" type="image/svg+xml" href="cross.svg?v=2" />
+    <link rel="stylesheet" href="test/style.css" />
+  </head>
+
+  <body
+    class="relative flex flex-col items-center justify-center min-h-screen p-4"
+  >
+    <!-- Background cố định -->
+    <div
+      class="fixed inset-0 bg-cover bg-center z-0"
+      style="background-image:url('/photo/church.jpg');"
+    ></div>
+
+    <!-- Loading Box -->
+    <div
+      id="loading-box"
+      class="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 animate-fadeIn"
+    >
+      <div
+        class="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-10 max-w-sm w-[85%] text-center shadow-[0_0_30px_rgba(0,255,255,0.4)] animate-scaleIn"
+      >
+        <!-- Loader neon -->
+        <div class="loader-neon mx-auto mb-6"></div>
+
+        <!-- Text -->
+        <p
+          class="text-cyan-200 font-semibold text-xl tracking-wide drop-shadow"
+        >
+          ĐANG TẢI DỮ LIỆU...
+        </p>
+
+        <!-- Sub text -->
+        <p class="text-white/70 text-sm mt-2 italic">
+          Vui lòng đợi trong giây lát
+        </p>
+      </div>
+    </div>
+
+    <!-- Overlay mờ -->
+    <div
+      id="start-box"
+      class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-49 animate-fadeIn"
+    >
+      <!-- Box chính -->
+      <div
+        class="relative bg-white/20 backdrop-blur-xl shadow-2xl border border-white/30 p-10 rounded-3xl max-w-md w-[90%] text-center animate-scaleIn"
+      >
+        <!-- Icon -->
+        <div class="mb-6 flex justify-center">
+          <div
+            class="w-20 h-20 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center shadow-lg animate-pulse"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-10 h-10 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              />
+            </svg>
+          </div>
+        </div>
+
+        <!-- Tiêu đề -->
+        <h2 class="text-4xl font-extrabold text-white drop-shadow-lg mb-3">
+          Sẵn Sàng Chưa?
+        </h2>
+
+        <!-- Nội dung -->
+        <p class="text-white/90 text-lg mb-6 leading-relaxed">
+          Đây là bài kiểm tra
+          <span id="quiz-title" class="font-semibold text-yellow-300"></span>.
+          Khi nhấn <b>Bắt đầu</b>, thời gian sẽ được tính và bạn không thể quay
+          lại.
+        </p>
+
+        <!-- Nút bắt đầu -->
+        <button
+          onclick="startQuiz()"
+          class="w-full py-3 mt-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-bold rounded-xl shadow-xl transition-all active:scale-95"
+        >
+          BẮT ĐẦU NGAY
+        </button>
+      </div>
+    </div>
+
+    <!-- Card Quiz Box -->
+    <div
+      class="relative w-full max-w-3xl bg-white glow-border shadow-2xl p-8 z-10 quiz-box"
+    >
+      <!-- Nút thoát -->
+      <button
+        type="button"
+        class="absolute top-4 right-4 text-white bg-red-600 hover:bg-red-700 rounded-full p-3 shadow-lg exit-btn transition"
+        onclick="closeQuiz()"
+        aria-label="Close"
+      >
+        ✕
+      </button>
+
+      <!-- Tiêu đề -->
+      <h1
+        class="header-text title-quiz text-4xl md:text-5xl font-extrabold text-center text-gray-800 mb-4"
+      ></h1>
+
+      <h2
+        class="text-2xl section-title text-gray-500 font-semibold mb-6 text-center"
+      >
+        Phần I: Trắc Nghiệm
+      </h2>
+
+      <!-- Nội dung quiz -->
+      <div id="quiz-content" class="space-y-4"></div>
+
+      <!-- Đồng hồ -->
+      <p class="text-center mt-6 text-2xl font-bold text-red-500 digital-clock">
+        Thời gian còn lại: <span id="time">05:00</span> giây
+      </p>
+    </div>
+
+    <div
+      class="fixed bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded pointer-events-none"
+    >
+      Design by: Khối Phụng Vụ Gx An Ngãi
+    </div>
+
+    <!-- JS -->
+    <script src="script.js"></script>
+    <script src="test/script.js"></script>
+    <script src="https://unpkg.com/flowbite@1.7.1/dist/flowbite.js"></script>
+  </body>
+</html>
