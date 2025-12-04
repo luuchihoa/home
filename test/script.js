@@ -31,16 +31,22 @@ const examConfig = {
     title: ' ÔN TẬP 15 PHÚT',
     api: 'https://script.google.com/macros/s/AKfycbzs823Exjgop4XQHd90PVcjSMD3INg2j4V0Iy3uN0zAhZfvwHZIonpIEW0HdD8YOE4Y/exec',
     time: 15 * 60,
+    mcqCount: 10,
+    essayCount: 2,
   },
   '1tiet': {
     title: ' ÔN TẬP 1 TIẾT',
     api: 'https://script.google.com/macros/s/AKfycbwOuqPMsL1VjVy78FpeTEAMaYjWMkp6UqTBe9KSjaqu-f16F8RyO5iNc3xYqluEB9LyyA/exec',
     time: 45 * 60,
+    mcqCount: 20,
+    essayCount: 3,
   },
   hocky1: {
     title: ' ÔN TẬP HỌC KỲ I',
     api: 'https://script.google.com/macros/s/AKfycbxgznZnvG0OhZr7p8nFxLAdoXhKMYpZNISmRhAnONoIW3SxYwDDP65olJEB7jN_pCGu/exec',
     time: 45 * 60,
+    mcqCount: 20,
+    essayCount: 3,
   },
 };
 
@@ -50,11 +56,12 @@ function getExamType() {
   return params.get('type'); // ví dụ -> "1tiet"
 }
 const examType = getExamType();
+// Đặt thời gian
+const config = examConfig[examType];
+totalTime = config.time;
 // ====================== HÀM LOAD JSON =========================
 window.loadData = async function () {
   document.querySelector('.header-text').style.display = 'block';
-
-  const config = examConfig[examType];
 
   // Nếu không có type → báo lỗi
   if (!config) {
@@ -65,9 +72,6 @@ window.loadData = async function () {
 
   // Đặt tiêu đề bài thi
   document.querySelector('.title-quiz').textContent = config.title;
-
-  // Đặt thời gian
-  totalTime = config.time;
 
   try {
     const res = await fetch(config.api);
@@ -414,6 +418,10 @@ function startQuiz() {
   document.getElementById('start-box').style.display = 'none';
   // Hiển thị quiz
   document.querySelector('.quiz-box').style.display = 'block';
+  // Hiển thị đồng hồ
+  document.querySelector('.digital-clock').style.display = 'block';
+  // Đặt thời gian
+  totalTime = config.time;
   randomQuestion();
   current = 0;
   scoreChoice = 0;
