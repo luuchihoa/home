@@ -112,17 +112,7 @@ function autoFont() {
   applyFont();
 }
 window.autoFont = autoFont;
-
 applyFont();
-
-function adaptSizes() {
-  const w = window.innerWidth;
-  const tb = document.querySelector('.tabbar');
-  if (w < 360) tb.style.padding = '6px';
-  else tb.style.padding = '';
-}
-window.addEventListener('resize', adaptSizes);
-adaptSizes();
 
 const modals = [
   { id: 'modal', toggle: toggleModal },
