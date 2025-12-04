@@ -432,7 +432,7 @@ async function sendData(username, value) {
 
 // ====================== Nút đóng =========================
 window.closeQuiz = function () {
-  window.location.assign('../index.html');
+  window.location.assign('index.html');
 };
 
 // ====================== BẮT ĐẦU =========================
