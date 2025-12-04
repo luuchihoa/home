@@ -289,6 +289,7 @@ function showEssayPart() {
 function checkEssay() {
   document.querySelector('.section-title').style.display = 'none';
   document.querySelector('.header-text').style.display = 'none';
+  document.querySelector('.digital-clock').style.display = 'none';
 
   let totalEssayScore = 0;
 
@@ -296,24 +297,27 @@ function checkEssay() {
     const ansRaw = document.getElementById(`essay${i}`)?.value || '';
     const ans = ansRaw.toLowerCase();
     let score = 0;
-
+    let essayAvgPerQuestion;
+    essayAvgPerQuestion = 5.0 / config.essayCount;
+    console.log(essayAvgPerQuestion);
     q.keywords.forEach(item => {
+      item.point = 5.0 / config.essayCount / q.keywords.length;
+      console.log(item.point);
+
       const keyLower = item.word.map(w => w.toLowerCase());
       if (keyLower.every(w => ans.includes(w))) score += item.point;
     });
-    if (score > 2.5) score = 2.5;
+    if (score >= essayAvgPerQuestion) score = essayAvgPerQuestion;
     totalEssayScore += score;
   });
 
   const avgEssayScore = totalEssayScore.toFixed(2);
-  const choiceScoreFixed = ((scoreChoice / quizQuestions.length) * 5).toFixed(
-    2
-  );
+  const avgMcqScore = ((scoreChoice / quizQuestions.length) * 5).toFixed(2);
 
   showResults(
-    choiceScoreFixed,
+    avgMcqScore,
     avgEssayScore,
-    (parseFloat(choiceScoreFixed) + parseFloat(avgEssayScore)).toFixed(1)
+    (parseFloat(avgMcqScore) + parseFloat(avgEssayScore)).toFixed(2)
   );
 }
 
