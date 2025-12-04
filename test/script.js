@@ -84,8 +84,8 @@ window.loadData = async function () {
   }
 };
 function randomQuestion() {
-  quizQuestions = getRandomItems(questions, 2);
-  essayQuizQuestions = getRandomItems(essayQuestions, 2);
+  quizQuestions = getRandomItems(questions, config.mcqCount);
+  essayQuizQuestions = getRandomItems(essayQuestions, config.essayCount);
 }
 // ====================== ĐỒNG HỒ =========================
 function formatTime(sec) {
