@@ -13,10 +13,10 @@ window.openPVDetail = function (name) {
     .forEach(p => p.classList.remove('active'));
 
   if (name === '15 Phút') {
-    window.location.href = 'test/index.html?type=15phut';
+    window.location.href = './test.index.html?type=15phut';
   } else if (name === '1 Tiết') {
-    window.location.href = 'test/index.html?type=1tiet';
+    window.location.href = './test.index.html?type=1tiet';
   } else if (name === 'Kỳ I') {
-    window.location.href = 'test/index.html?type=hocky1';
+    window.location.href = './test.index.html?type=hocky1';
   }
 };
