@@ -301,17 +301,11 @@ function checkEssay() {
     const ansRaw = document.getElementById(`essay${i}`)?.value || '';
     const ans = ansRaw.toLowerCase();
     let score = 0;
-    let essayAvgPerQuestion;
-    essayAvgPerQuestion = 5.0 / config.essayCount;
-    console.log(essayAvgPerQuestion);
     q.keywords.forEach(item => {
       item.point = 5.0 / config.essayCount / q.keywords.length;
-      console.log(item.point);
-
       const keyLower = item.word.map(w => w.toLowerCase());
       if (keyLower.every(w => ans.includes(w))) score += item.point;
     });
-    if (score >= essayAvgPerQuestion) score = essayAvgPerQuestion;
     totalEssayScore += score;
   });
 
