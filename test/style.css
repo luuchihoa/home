@@ -14,7 +14,6 @@
 }
 /* ==================== QUIZ BOX ==================== */
 .quiz-box {
-  display:none;
   position: relative;
   max-width: 700px;
   margin: 2rem auto;
@@ -33,14 +32,14 @@
   .quiz-box {
     width: 90%;
     padding: 2rem;
-    max-height: 95vh;
   }
 }
 
 /* ==================== OPTION ==================== */
 .option {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: 12px;
   background: #fff7ed;
   border: 1px solid #fcd34d;
@@ -82,11 +81,11 @@
 }
 
 /* Selected / Correct / Wrong */
-.option.selected .option-circle { background: #4a90e2; color: #fff; }
-.option.correct { background: #bbf7d0 !important; border-color: #10b981 !important; color:#065f46; font-weight:600;}
+.option.correct { background: #4af887 !important; border-color: #10b981 !important; color:#065f46; font-weight:600;}
 .option.correct .option-circle { background: #10b981 !important; color:#fff !important; border-color:#059669 !important;}
-.option.wrong { background: #fecaca !important; border-color:#ef4444 !important; color:#7f1d1d; font-weight:600;}
+.option.wrong { background: #f15252 !important; border-color:#ef4444 !important; color:#7f1d1d; font-weight:600;}
 .option.wrong .option-circle { background:#ef4444 !important; color:#fff !important; border-color:#b91c1c !important; }
+.option.wrong .option-text, .option.correct .option-text {color:black;}
 
 /* ==================== BUTTON ==================== */
 #skipBtn, #submitEssay {
@@ -107,7 +106,7 @@
 
 /* ==================== BODY & BACKGROUND ==================== */
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Inter', sans-serif;
   min-height: 100vh;
   margin: 0;
   padding: 0;
