@@ -1,8 +1,3 @@
-// ======================== BASE PATH (GitHub Pages SAFE) ========================
-const BASE_PATH = location.pathname.replace(/\/[^/]*$/, '');
-// VD:
-// local:      /index.html        -> ""
-// github:     /phungvu/index.html -> /phungvu
 
 // ======================== LOAD HTML CHUNG ========================
 function loadPage(id, file, callback) {
@@ -36,9 +31,9 @@ function loadQuizPage(type) {
   unloadQuizCSS();
   unloadQuizScript();
 
-  const htmlPath = `${BASE_PATH}/${pageName}/index.html`;
-  const cssPath  = `${BASE_PATH}/${pageName}/style.css`;
-  const jsPath   = `${BASE_PATH}/${pageName}/script.js`;
+  const htmlPath = `./${pageName}/index.html`;
+  const cssPath  = `./${pageName}/style.css`;
+  const jsPath   = `./${pageName}/script.js`;
 
   fetch(htmlPath)
     .then(res => {
@@ -125,4 +120,4 @@ window.openPVDetail = function (name) {
 };
 
 // ======================== LOAD GLOBAL STYLE ========================
-loadQuizCSS(`${BASE_PATH}/style.css`, "global");
+loadQuizCSS(`./style.css`, "global");
