@@ -1,3 +1,5 @@
+const BASE_PATH = location.pathname.split('/').slice(0, -1).join('/');
+
 function loadPage(id, file, callback) {
   fetch(file)
     .then(res => res.text())
@@ -14,23 +16,22 @@ window.loadPage=loadPage;
 
 // ======================== LOAD QUIZ PAGE =========================
 function loadQuizPage(type) {
-  let pageName;
-  if (type === 'dovui') {
-    pageName = 'dovui';
-  } else pageName = 'test';
+  const pageName = type === 'dovui' ? 'dovui' : 'test';
   const container = document.getElementById("quiz-root");
   window.stopTimer=null;
 
   // Clear DOM cũ
   container.innerHTML = "";
 
+  const base = location.pathname.replace(/\/[^/]*$/, '');
+
   // Load HTML mới
-  fetch(`../${pageName}/index.html`)
+  fetch(`${base/${pageName}/index.html`)
       .then(res => res.text())
       .then(html => {
           container.innerHTML = html;
 
-          loadQuizCSS(`../${pageName}/style.css`); // ⬅️ load CSS
+          loadQuizCSS(`${base/${pageName}/style.css`); // ⬅️ load CSS
           // Load script quiz
           loadQuizScript(pageName,() => {
               if (typeof window.initQuiz === "function") {
