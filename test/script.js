@@ -1,10 +1,10 @@
 // ====== Setup âm thanh ======
-window.winSound    = window.winSound    || new Audio('../sound/win.mp3');
-window.selectSound = window.selectSound || new Audio('../sound/click.mp3');
-window.hoverSound  = window.hoverSound  || new Audio('../sound/hover.mp3');
-window.wrongSound  = window.wrongSound  || new Audio('../sound/buzzer.mp3');
-window.correctSound= window.correctSound|| new Audio('../sound/ding.mp3');
-window.tickSound   = window.tickSound   || new Audio('../sound/tick.wav');
+window.winSound    = window.winSound    || new Audio('./sound/win.mp3');
+window.selectSound = window.selectSound || new Audio('./sound/click.mp3');
+window.hoverSound  = window.hoverSound  || new Audio('./sound/hover.mp3');
+window.wrongSound  = window.wrongSound  || new Audio('./sound/buzzer.mp3');
+window.correctSound= window.correctSound|| new Audio('./sound/ding.mp3');
+window.tickSound   = window.tickSound   || new Audio('./sound/tick.wav');
 
 tickSound.volume = 0.7;
 winSound.volume = 0.35;
