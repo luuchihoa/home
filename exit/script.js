@@ -1,4 +1,5 @@
 // ====================== NÚT THOÁT =========================
+window.isSaveHidden = true;
 window.openExitModal = function() {
   if(!isSaveHidden) {
     document.getElementById("warning-text-before").textContent = "Nếu bạn thoát,";
