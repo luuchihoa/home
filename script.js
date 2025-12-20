@@ -255,3 +255,15 @@ window.setProfileDefaut = function() {
 if(localStorage.getItem('username')){
   setProfileDefaut();
 }
+function loadPage(id, file, callback) {
+  fetch(file)
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById(id).innerHTML = html;
+      
+      // chạy callback nếu có
+      if (typeof callback === "function") {
+        callback();
+      }
+    });
+}
