@@ -1,32 +1,46 @@
-<!DOCTYPE html>
-<html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <title>KHỐI PHỤNG VỤ</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- TailwindCSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Flowbite -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/flowbite@1.7.1/dist/flowbite.min.css"
-    />
-    <link rel="icon" type="image/svg+xml" href="cross.svg?v=2" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
-
-  <body
-    class="relative flex flex-col items-center justify-center min-h-screen p-4"
-  >
-    <!-- Background cố định -->
+<div
+  class="relative flex flex-col items-center justify-center min-h-screen p-4"
+>
+  <!-- Background cố định -->
+  <div
+    class="fixed inset-0 bg-cover bg-center z-0"
+  ></div>  
+  <!-- EXIT MODAL -->
     <div
-      class="fixed inset-0 bg-cover bg-center z-0"
-      style="background-image:url('../photo/church.jpg');"
-    ></div>
+      id="exit-modal"
+      class="fixed inset-0 z-[200] hidden items-center justify-center bg-black/60 backdrop-blur-sm"
+    >
+      <div
+        class="bg-white rounded-3xl shadow-2xl p-8 w-[90%] max-w-md text-center animate-scaleIn"
+      >
+        <h3 class="text-2xl font-extrabold text-gray-900 mb-3">
+          Thoát bài thi?
+        </h3>
 
-    <!-- Loading Box -->
-    <div
+        <p class="!text-gray-800 text-lg mb-6">
+          Nếu thoát bây giờ, <b class="text-red-600">bài làm sẽ không được lưu</b>.
+        </p>
+
+        <div class="flex gap-4">
+          <button
+            onclick="closeExitModal()"
+            class="flex-1 py-3 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold transition"
+          >
+            Ở lại
+          </button>
+
+          <button
+            onclick="confirmExit()"
+            class="flex-1 py-3 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold shadow-lg transition"
+          >
+            Thoát
+          </button>
+        </div>
+      </div>
+    </div>
+  <!-- Loading Box -->
+  <div
       id="loading-box"
       class="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 animate-fadeIn"
     >
@@ -48,38 +62,82 @@
           Vui lòng đợi trong giây lát
         </p>
       </div>
-    </div>
+  </div>
 
-    <!-- Overlay mờ -->
+  <!-- Load Error -->
+  <div class="error-box flex items-center justify-center min-h-[300px] z-50 hidden">
+    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center animate-fadeIn">
+      
+      <!-- Icon -->
+      <div class="mx-auto mb-5 flex items-center justify-center w-16 h-16 rounded-full bg-orange-100">
+        <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" stroke-width="2"
+          viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M12 9v3m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z" />
+        </svg>
+      </div>
+
+      <!-- Title -->
+      <h2 class="text-xl font-bold text-orange-500 mb-2">
+        Không thể tải dữ liệu
+      </h2>
+
+      <!-- Description -->
+      <p class="text-gray-500 mb-6 leading-relaxed">
+        Hệ thống không thể kết nối đến máy chủ.<br>
+        Vui lòng kiểm tra kết nối mạng hoặc thử lại sau.
+      </p>
+
+      <!-- Actions -->
+      <div class="flex gap-4">
+        <!-- Retry -->
+        <button
+          onclick="reload()"
+          class="flex-1 py-3 rounded-xl bg-green-400 text-white font-semibold
+                 hover:bg-green-600 active:scale-95 transition">
+          🔄 Thử lại
+        </button>
+
+        <!-- Exit -->
+        <button
+          onclick="confirmExit()"
+          class="flex-1 py-3 rounded-xl bg-red-400 text-white font-semibold
+                 hover:bg-red-600 active:scale-95 transition">
+          ⏹️ Exit
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Overlay mờ -->
+  <div
+    id="start-box"
+    class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-49 animate-fadeIn hidden"
+  >
+    <!-- Box chính -->
     <div
-      id="start-box"
-      class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-49 animate-fadeIn"
+      class="relative bg-white/20 backdrop-blur-xl shadow-2xl border border-white/30 p-10 rounded-3xl max-w-md w-[90%] text-center animate-scaleIn"
     >
-      <!-- Box chính -->
-      <div
-        class="relative bg-white/20 backdrop-blur-xl shadow-2xl border border-white/30 p-10 rounded-3xl max-w-md w-[90%] text-center animate-scaleIn"
-      >
-        <!-- Icon -->
-        <div class="mb-6 flex justify-center">
-          <div
-            class="w-20 h-20 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center shadow-lg animate-pulse"
+      <!-- Icon -->
+      <div class="mb-6 flex justify-center">
+        <div class="w-20 h-20 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center shadow-lg animate-pulse">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-10 h-10 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-10 h-10 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M13 10V3L4 14h7v7l9-11h-7z"
-              />
-            </svg>
-          </div>
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            />
+          </svg>
         </div>
+      </div>
 
         <!-- Tiêu đề -->
         <h2 class="text-4xl font-extrabold text-white drop-shadow-lg mb-3">
@@ -88,10 +146,9 @@
 
         <!-- Nội dung -->
         <p class="text-white/90 text-lg mb-6 leading-relaxed">
-          Đây là bài kiểm tra
-          <span id="quiz-title" class="font-semibold text-yellow-300"></span>.
-          Khi nhấn <b>Bắt đầu</b>, thời gian sẽ được tính và bạn không thể quay
-          lại.
+          Nhấn
+          <span id="quiz-title" class="font-semibold text-yellow-300">Bắt đầu</span>
+          để tham gia bài ôn bài.<br> <span class="font-semibold text-green-500">Chúc bạn thi thật tốt!</span>
         </p>
 
         <!-- Nút bắt đầu -->
@@ -106,22 +163,25 @@
 
     <!-- Card Quiz Box -->
     <div
-      class="relative w-full max-w-3xl bg-white glow-border shadow-2xl p-8 z-10 quiz-box"
+      class="relative w-full max-w-3xl bg-white glow-border shadow-2xl p-8 quiz-box hidden"
     >
-      <!-- Nút thoát -->
+      <!-- Exit Button -->
       <button
-        type="button"
-        class="absolute top-4 right-4 text-white bg-red-600 hover:bg-red-700 rounded-full p-3 shadow-lg exit-btn transition"
-        onclick="closeQuiz()"
-        aria-label="Close"
+        onclick="openExitModal()"
+        class="absolute top-2 right-2 z-[150]
+               w-10 h-10 rounded-full
+               bg-black/60 text-white
+               hover:bg-red-600
+               flex items-center justify-center
+               shadow-lg transition"
       >
         ✕
       </button>
 
       <!-- Tiêu đề -->
       <h1
-        class="header-text title-quiz text-4xl md:text-5xl font-extrabold text-center text-gray-800 mb-4"
-      ></h1>
+        class="header-quiz title-quiz text-4xl md:text-5xl font-extrabold text-center text-orange-500 mb-4"
+      >ÔN TẬP 15 PHÚT</h1>
 
       <h2
         class="text-2xl section-title text-gray-500 font-semibold mb-6 text-center"
@@ -132,10 +192,19 @@
       <!-- Nội dung quiz -->
       <div id="quiz-content" class="space-y-4"></div>
 
-      <!-- Đồng hồ -->
-      <p class="text-center mt-6 text-2xl font-bold text-red-500 digital-clock">
-        Thời gian còn lại: <span id="time">05:00</span> giây
-      </p>
+      <div class="digital-clock mt-6 mx-auto w-fit flex items-center gap-3
+            px-5 py-3 rounded-full
+            bg-gradient-to-r from-orange-100 to-orange-200
+            shadow-lg">
+        <span class="text-xl font-semibold text-orange-600">
+          ⏱ Thời gian
+        </span>
+        <span id="time"
+              class="text-2xl font-extrabold text-red-600 tracking-wider">
+          05:00
+        </span>
+      </div>
+
     </div>
 
     <div
@@ -143,10 +212,4 @@
     >
       Design by: Khối Phụng Vụ Gx An Ngãi
     </div>
-
-    <!-- JS -->
-    <script src="../script.js"></script>
-    <script src="script.js"></script>
-    <script src="https://unpkg.com/flowbite@1.7.1/dist/flowbite.js"></script>
-  </body>
-</html>
+  </div>
