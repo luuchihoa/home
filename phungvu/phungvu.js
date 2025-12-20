@@ -25,12 +25,12 @@ function loadQuizPage(type) {
   container.innerHTML = "";
 
   // Load HTML mới
-  fetch(`/${pageName}/index.html`)
+  fetch(`../${pageName}/index.html`)
       .then(res => res.text())
       .then(html => {
           container.innerHTML = html;
 
-          loadQuizCSS(`/${pageName}/style.css`); // ⬅️ load CSS
+          loadQuizCSS(`../${pageName}/style.css`); // ⬅️ load CSS
           // Load script quiz
           loadQuizScript(pageName,() => {
               if (typeof window.initQuiz === "function") {
@@ -46,7 +46,7 @@ function loadQuizPage(type) {
 // ======================== LOAD SCRIPT =========================
 function loadQuizScript(pageName, callback) {
     const s = document.createElement("script");
-    s.src = `/${pageName}/script.js?t=` + Date.now(); // chống cache
+    s.src = `../${pageName}/script.js?t=` + Date.now(); // chống cache
     s.dataset.dynamic = "quiz";
     s.onload = callback;
     s.onerror = () => console.error("Không load được script.js");
