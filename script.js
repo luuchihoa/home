@@ -38,10 +38,10 @@ window.openDetail = function (name) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
 
   if (name === 'Khối Kinh Thánh') {
-    loadPage('kinhthanh', '../kinhthanh/kinhthanh.html');
+    loadPage('kinhthanh', '/kinhthanh/kinhthanh.html');
     document.getElementById('kinhthanh').classList.add('active');
   } else if (name === 'Khối Phụng Vụ') {
-    loadPage('phungvu', '../phungvu/phungvu.html');
+    loadPage('phungvu', './phungvu/phungvu.html');
     document.getElementById('phungvu').classList.add('active');
   } else if (name === 'Khối Thêm Sức') {
     loadPage('themsuc', '../themsuc/themsuc.html');
