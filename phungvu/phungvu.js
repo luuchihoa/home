@@ -55,11 +55,10 @@ function loadQuizScript(pageName, callback) {
 
 // ======================== UNLOAD SCRIPT =========================
 function unloadQuizScript() {
-  console.log('css');
     document.querySelectorAll("script[data-dynamic=quiz]").forEach(s => s.remove());
 }
 // ======================== load css =========================
-function loadQuizCSS(src,data) {
+function loadQuizCSS(src,data='quiz') {
     if (document.querySelector(`link[data-dynamic='${data}']`)) return;
 
     const link = document.createElement("link");
