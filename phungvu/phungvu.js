@@ -1,116 +1,128 @@
-const BASE_PATH = location.pathname.split('/').slice(0, -1).join('/');
+// ======================== BASE PATH (GitHub Pages SAFE) ========================
+const BASE_PATH = location.pathname.replace(/\/[^/]*$/, '');
+// VD:
+// local:      /index.html        -> ""
+// github:     /phungvu/index.html -> /phungvu
 
+// ======================== LOAD HTML CHUNG ========================
 function loadPage(id, file, callback) {
   fetch(file)
-    .then(res => res.text())
+    .then(res => {
+      if (!res.ok) throw new Error(res.status);
+      return res.text();
+    })
     .then(html => {
       document.getElementById(id).innerHTML = html;
-      
-      // chạy callback nếu có
-      if (typeof callback === "function") {
-        callback();
-      }
-    });
+      callback?.();
+    })
+    .catch(err => console.error("Load page error:", err));
 }
-window.loadPage=loadPage;
+window.loadPage = loadPage;
 
-// ======================== LOAD QUIZ PAGE =========================
+// ======================== LOAD QUIZ PAGE ========================
 function loadQuizPage(type) {
-  const pageName = type === 'dovui' ? 'dovui' : 'test';
+  const pageName = type; // dùng trực tiếp tên folder
   const container = document.getElementById("quiz-root");
-  window.stopTimer=null;
 
-  // Clear DOM cũ
-  container.innerHTML = "";
-
-  const base = location.pathname.replace(/\/[^/]*$/, '');
-
-  // Load HTML mới
-  fetch(`${base/${pageName}/index.html`)
-      .then(res => res.text())
-      .then(html => {
-          container.innerHTML = html;
-
-          loadQuizCSS(`${base/${pageName}/style.css`); // ⬅️ load CSS
-          // Load script quiz
-          loadQuizScript(pageName,() => {
-              if (typeof window.initQuiz === "function") {
-                  window.initQuiz(type);
-              } else {
-                  console.error("initQuiz() NOT FOUND!");
-              }
-          });
-      })
-      .catch(err => console.error("Load HTML error:", err));
-}
-
-// ======================== LOAD SCRIPT =========================
-function loadQuizScript(pageName, callback) {
-    const s = document.createElement("script");
-    s.src = `../${pageName}/script.js?t=` + Date.now(); // chống cache
-    s.dataset.dynamic = "quiz";
-    s.onload = callback;
-    s.onerror = () => console.error("Không load được script.js");
-    document.body.appendChild(s);
-}
-
-// ======================== UNLOAD SCRIPT =========================
-function unloadQuizScript() {
-    document.querySelectorAll("script[data-dynamic=quiz]").forEach(s => s.remove());
-}
-// ======================== load css =========================
-function loadQuizCSS(src,data='quiz') {
-    if (document.querySelector(`link[data-dynamic='${data}']`)) return;
-
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = src;
-    link.dataset.dynamic = "quiz";
-    document.head.appendChild(link);
-}
-window.loadQuizCSS = loadQuizCSS;
-// ======================== Unload css =========================
-function unloadQuizCSS(data='quiz') {
-    document.querySelectorAll(`link[data-dynamic='${data}']`).forEach(l => l.remove());
-}
-window.unloadQuizCSS = unloadQuizCSS;
-
-window.openPVDetail = function (name) {
-  document.getElementById('app').style.display='none';
-  unloadQuizCSS();
-  if (name === '15 Phút - HK1') {
-    loadQuizPage('15phut-hk1');
-  } else if (name === '1 Tiết - HK1') {
-    loadQuizPage('1tiet-hk1');
-  } else if (name === 'Kỳ I') {
-    loadQuizPage('hocky1');
-  } else if (name === 'Đố Vui') {
-    loadQuizPage('dovui');
-  } else if (name === '15 Phút - HK2') {
-    loadQuizPage('15phut-hk2');
-  } else if (name === '1 Tiết - HK2') {
-    loadQuizPage('1tiet-hk2');
-  } else if (name === 'Kỳ II') {
-    loadQuizPage('hocky2');
-  }
-};
-// Lưu các script đã load
-window.loadedScripts = new Set();
-
-window.loadScript = function(src, callback) {
-  if (window.loadedScripts.has(src)) {
-    callback?.();
+  if (!container) {
+    console.error("#quiz-root NOT FOUND");
     return;
   }
 
-  const s = document.createElement("script");
-  s.src = src;
-  s.dataset.dynamic = 'quiz';   // 🔥 đánh dấu script thuộc page nào
-  s.onload = callback;
-  document.body.appendChild(s);
+  window.stopTimer = null;
 
-  window.loadedScripts.add(src);
+  // clear cũ
+  container.innerHTML = "";
+  unloadQuizCSS();
+  unloadQuizScript();
+
+  const htmlPath = `${BASE_PATH}/${pageName}/index.html`;
+  const cssPath  = `${BASE_PATH}/${pageName}/style.css`;
+  const jsPath   = `${BASE_PATH}/${pageName}/script.js`;
+
+  fetch(htmlPath)
+    .then(res => {
+      if (!res.ok) throw new Error(res.status);
+      return res.text();
+    })
+    .then(html => {
+      container.innerHTML = html;
+
+      // load CSS
+      loadQuizCSS(cssPath);
+
+      // load JS
+      loadQuizScript(jsPath, () => {
+        if (typeof window.initQuiz === "function") {
+          window.initQuiz(type);
+        } else {
+          console.error("❌ initQuiz() NOT FOUND in", jsPath);
+        }
+      });
+    })
+    .catch(err => console.error("Load quiz error:", err));
+}
+window.loadQuizPage = loadQuizPage;
+
+// ======================== LOAD SCRIPT ========================
+function loadQuizScript(src, callback) {
+  const s = document.createElement("script");
+  s.src = src + "?t=" + Date.now(); // chống cache
+  s.dataset.dynamic = "quiz";
+  s.onload = callback;
+  s.onerror = () => console.error("❌ Cannot load script:", src);
+  document.body.appendChild(s);
 }
 
-// Load Style.css
-loadQuizCSS('style.css');
+// ======================== UNLOAD SCRIPT ========================
+function unloadQuizScript() {
+  document
+    .querySelectorAll("script[data-dynamic='quiz']")
+    .forEach(s => s.remove());
+}
+
+// ======================== LOAD CSS ========================
+function loadQuizCSS(src, key = "quiz") {
+  if (document.querySelector(`link[data-dynamic='${key}']`)) return;
+
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = src + "?t=" + Date.now();
+  link.dataset.dynamic = key;
+  document.head.appendChild(link);
+}
+window.loadQuizCSS = loadQuizCSS;
+
+// ======================== UNLOAD CSS ========================
+function unloadQuizCSS(key = "quiz") {
+  document
+    .querySelectorAll(`link[data-dynamic='${key}']`)
+    .forEach(l => l.remove());
+}
+window.unloadQuizCSS = unloadQuizCSS;
+
+// ======================== OPEN QUIZ ========================
+window.openPVDetail = function (name) {
+  document.getElementById("app").style.display = "none";
+
+  const map = {
+    "15 Phút - HK1": "15phut-hk1",
+    "1 Tiết - HK1": "1tiet-hk1",
+    "Kỳ I": "hocky1",
+    "Đố Vui": "dovui",
+    "15 Phút - HK2": "15phut-hk2",
+    "1 Tiết - HK2": "1tiet-hk2",
+    "Kỳ II": "hocky2",
+  };
+
+  const page = map[name];
+  if (!page) {
+    console.error("❌ Quiz not found:", name);
+    return;
+  }
+
+  loadQuizPage(page);
+};
+
+// ======================== LOAD GLOBAL STYLE ========================
+loadQuizCSS(`${BASE_PATH}/style.css`, "global");
