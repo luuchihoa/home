@@ -608,6 +608,7 @@ window.confirmSave = async function() {
   }
   document.getElementById("confirm-save")?.classList?.add("hidden");
   loadUser();
+  isSaveHidden = true;
   toggleUserModal(false);
   //Reset UI
   resetConfirmSave();
