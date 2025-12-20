@@ -87,7 +87,6 @@ window.toggleUserModal = function (show) {
     }, 50);
 
   } else {
-    console.log('vãi');
     isUserModalOpen = false;
     if (document.activeElement instanceof HTMLElement) {
       document.activeElement.blur();
