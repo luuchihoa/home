@@ -199,15 +199,15 @@ window.addEventListener('scroll', () => {
       name: "noel",
       from: "12-1",
       to:   "1-15",
-      pc:   "/photo/background/chrismax_pc.jpg",
-      mobile: "/photo/background/chrismax_mobile.jpg"
+      pc:   "../photo/background/chrismax_pc.jpg",
+      mobile: "../photo/background/chrismax_mobile.jpg"
     },
     {
       name: "phucsinh",
       from: "03-22",
       to:   "04-30",
-      pc:   "/photo/background/phucsinh_pc.jpg",
-      mobile: "/photo/background/phucsinh_mobile.jpg"
+      pc:   "../photo/background/phucsinh_pc.jpg",
+      mobile: "../photo/background/phucsinh_mobile.jpg"
     }
   ];
 
@@ -228,8 +228,8 @@ window.addEventListener('scroll', () => {
 
   if (!bg) {
     bg = isMobile
-      ? "/photo/background/bg_mobile.jpg"
-      : "/photo/background/bg_pc.jpg";
+      ? "../photo/background/bg_mobile.jpg"
+      : "../photo/background/bg_pc.jpg";
   }
 
   document.body.style.background = `
