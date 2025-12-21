@@ -5,7 +5,7 @@
   --card: #ffffff;
   --accent: #0b74ff;
   --text: #0f1724;
-  --muted: #00000;
+  --muted: #000000;
   --radius: 12px;
   --font-size: 16px;
   --font-title: 28px;
@@ -30,7 +30,7 @@
 html,
 body {
   min-height: clamp(100vh, 80vh, 1200px);
-  height: AUTO;
+  height: auto;
   margin: 0;
   font-family: Inter, system-ui, Arial;
   background: var(--bg);
@@ -174,10 +174,8 @@ input[type='password'] {
   z-index: 998;
   border: 1px solid rgba(15, 23, 36, 0.06);
 }
-button .tab-item :hover {
-  background: #000000;
-  transform: scale(1.03);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+.tab-item:hover {
+  color: rgb(218, 64, 21);
 }
 
 /* ensure tabbar color matches theme (slightly card-like) */
