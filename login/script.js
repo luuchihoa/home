@@ -15,9 +15,9 @@ window.login = async function () {
     `${API_URL}?action=login&username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}`
   );
   const result = await res.json();
-  localStorage.setItem('username', username);
   if (result.success) {
     message.textContent = 'Đăng nhập thành công ✔';
+    localStorage.setItem('username', username);
     loadUser();
     setTimeout(() => {
       // Ẩn modal login
@@ -30,21 +30,23 @@ window.login = async function () {
   }
 };
 window.updateLoginTab = function () {
-  // const displayName = fullname.trim().split(' ').slice(-2).join(' ');
   const tabLogin = document.getElementById('tab-login');
-  if (tabLogin) {
+  const username = localStorage.getItem("username");
+
+  if (!tabLogin) return;
+
+  if (username) {
     tabLogin.innerHTML = `<span class="icon">👤</span><span class="label">Profile</span>`;
-    tabLogin.onclick = () => toggleUserModal(true); // mở modal user
-  }
-};
-window.logout = function () {
-  localStorage.removeItem('fullname');
-  localStorage.removeItem('username');
-  const tabLogin = document.getElementById('tab-login');
-  if (tabLogin) {
+    tabLogin.onclick = () => toggleUserModal(true);
+  } else {
     tabLogin.innerHTML = `<span class="icon">🔐</span><span class="label">Login</span>`;
     tabLogin.onclick = () => toggleModal(true);
   }
+};
+
+window.logout = function () {
+  localStorage.removeItem('username');
+  updateLoginTab();
   toggleUserModal(false); // ẩn modal user nếu đang mở
 };
 //         <!-- Chọn Avatar -->
@@ -58,7 +60,7 @@ window.selectAvatar = function() {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      showSuccessToast("Chỉ chọn ảnh");
+      toastWarning("Chỉ chọn ảnh");
       return;
     }
 
@@ -84,7 +86,7 @@ window.selectAvatar = function() {
 
     } catch (err) {
       console.error(err);
-      showSuccessToast("Resize ảnh thất bại");
+      toastError("Resize ảnh thất bại");
     } finally {
       showAvatarLoading(false);
     }
@@ -171,11 +173,11 @@ async function uploadAvatar(base64) {
       // ✅ đổi sang avatar thật từ Drive
       document.getElementById("avatarImg").src = data.avatar;
     } else {
-      showSuccessToast(data.error || "Lỗi cập nhật avatar");
+      toastError(data.error || "Lỗi cập nhật avatar");
     }
   } catch (err) {
     console.error(err);
-    showSuccessToast("Không thể upload avatar");
+    toastError("Không thể upload avatar");
   }
 }
 function showAvatarLoading(show) {
@@ -395,7 +397,7 @@ window.editField = function (field) {
 function saveData(newValue, oldValue, inputEl, curId) {
   const value = newValue.trim();
   if (!value) {
-    showSuccessToast("Tên không được để trống");
+    toastWarning("Tên không được để trống");
     inputEl.focus();
     return;
   }
@@ -454,13 +456,13 @@ window.submitChangePassword = async function () {
   const username = localStorage.getItem("username");
 
   if (!oldPass || !newPass || !confirmPass)
-    return showSuccessToast("Vui lòng nhập đầy đủ thông tin");
+    return toastWarning("Vui lòng nhập đầy đủ thông tin");
 
   if (newPass.length < 8)
-    return showSuccessToast("Mật khẩu mới phải ≥ 8 ký tự");
+    return toastWarning("Mật khẩu mới phải ≥ 8 ký tự");
 
   if (newPass !== confirmPass)
-    return showSuccessToast("Mật khẩu mới không khớp");
+    return toastWarning("Mật khẩu mới không khớp");
 
   setSaveLoading(true);
 
@@ -478,15 +480,15 @@ window.submitChangePassword = async function () {
     const data = await res.json();
 
     if (!data.success) {
-      showSuccessToast("Đổi mật khẩu thất bại");
+      toastError("Đổi mật khẩu thất bại");
       return;
     }
-    showSuccessToast("✅ Đổi mật khẩu thành công");
+    toastSuccess("✅ Đổi mật khẩu thành công");
     setSaveLoading(false);
     closeChangePassword();
 
   } catch (err) {
-    showSuccessToast("❌ Lỗi kết nối server");
+    toastError("❌ Lỗi kết nối server");
     console.error(err);
   }
 }
@@ -595,15 +597,15 @@ window.confirmSave = async function() {
     const result = await res.json();
 
     if (!result.success) {
-      showSuccessToast(result.error || "Lưu dữ liệu thất bại");
+      toastError(result.error || "Lưu dữ liệu thất bại");
       return;
     }
 
-    showSuccessToast();
+    toastSuccess();
     closeChangePassword();
 
   } catch (err) {
-    showSuccessToast("❌ Lỗi kết nối server");
+    toastError("❌ Lỗi kết nối server");
     console.error(err);
   }
   document.getElementById("confirm-save")?.classList?.add("hidden");
@@ -618,9 +620,12 @@ window.closeConfirmSave = function() {
 }
 let toastTimer = null;
 
-function showSuccessToast(message = "Lưu dữ liệu thành công") {
-  const toast = document.getElementById("toast-success");
+function showToast(message = "Lưu dữ liệu thành công",bg) {
+  const toast = document.getElementById("toast-id");
+  const toastText = document.getElementById("toast-text");
   if (!toast) return;
+
+  toastText?.classList?.add(bg);
 
   // đổi nội dung nếu cần
   toast.querySelector("span:last-child").textContent = message;
@@ -632,6 +637,16 @@ function showSuccessToast(message = "Lưu dữ liệu thành công") {
   toastTimer = setTimeout(() => {
     toast.classList.add("hidden");
   }, 3000);
+}
+
+window.toastError = function(msg) {
+  showToast(msg, 'bg-red-500');
+}
+window.toastSuccess = function(msg) {
+  showToast(msg, 'bg-green-500');
+}
+window.toastWarning = function(msg) {
+  showToast(msg, 'bg-yellow-500');
 }
 function resetConfirmSave() {
   document.getElementById("confirm-title").textContent = "Lưu thay đổi";
