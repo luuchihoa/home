@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- LINK CSS -->
-    <link rel="stylesheet" href="./style.css" data-dynamic='quiz'/>
+    <link rel="stylesheet" href="style.css" data-dynamic='quiz'/>
   </head>
 
   <body>
@@ -714,16 +714,18 @@
 
     <!-- TOAST SUCCESS -->
     <div
-      id="toast-success"
+      id="toast-id"
       class="fixed top-6 right-6 z-[10001] hidden"
     >
       <div
-        class="flex items-center gap-3 bg-green-500 text-white px-5 py-3 rounded-xl shadow-lg"
+        id = "toast-text"
+        class="flex items-center gap-3 text-white px-5 py-3 rounded-xl shadow-lg"
       >
         <span class="text-xl"></span>
         <span class="font-medium">✅ Lưu dữ liệu thành công</span>
       </div>
     </div>
+
     <!-- EXIT MODAL -->
     <div
       id="exit-modal"
