@@ -75,7 +75,7 @@ window.toggleUserModal = function (show) {
   if (!m) return;
 
   if (show) {
-    window.isSaveHidden = true;
+    isSaveHidden = true;
     m.classList.add('show');
     m.removeAttribute('inert');
     m.setAttribute('aria-hidden', 'false');
@@ -165,13 +165,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-(function () {
-  const saved = localStorage.getItem('demo-theme') || '';
-  if (saved) setTheme(saved);
-  const savedName = localStorage.getItem('fullname');
-
-  updateLoginTab(savedName);
-})();
 let lastScrollY = 0;
 const tabbar = document.querySelector('.tabbar');
 
@@ -254,6 +247,7 @@ window.setProfileDefaut = function() {
 }
 if(localStorage.getItem('username')){
   setProfileDefaut();
+  updateLoginTab();
 }
 function loadPage(id, file, callback) {
   fetch(file)
@@ -267,3 +261,4 @@ function loadPage(id, file, callback) {
       }
     });
 }
+
