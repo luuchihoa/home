@@ -245,3 +245,36 @@ body {
 .animate-scaleIn {
   animation: scaleIn 0.25s ease-out;
 }
+/* Ánh sáng thánh giá */
+.cross-glow {
+  position: absolute;
+  width: 72px;
+  height: 120px;
+  filter: blur(8px);
+}
+
+/* thân dọc phát sáng */
+.cross-glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 120px;
+  background: rgba(255, 220, 120, 0.8);
+  box-shadow: 0 0 25px rgba(255, 220, 120, 0.9);
+}
+
+/* thanh ngang phát sáng */
+.cross-glow::after {
+  content: "";
+  position: absolute;
+  top: 38px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 16px;
+  background: rgba(255, 220, 120, 0.8);
+  box-shadow: 0 0 25px rgba(255, 220, 120, 0.9);
+}
+
