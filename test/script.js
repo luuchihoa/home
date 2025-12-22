@@ -27,6 +27,13 @@ window.hasRun = false;
 
 // ====================== CẤU HÌNH BÀI THI =========================
 window.examConfig = {
+  "15phut-hk12": {
+    title: "ÔN TẬP 15 PHÚT",
+    api: "https://script.google.com/macros/s/AKfycbzs823Exjgop4XQHd90PVcjSMD3INg2j4V0Iy3uN0zAhZfvwHZIonpIEW0HdD8YOE4Y/exec",
+    time: 900,
+    mcqCount: 10,
+    essayCount: 2
+  },
   "15phut-hk1": {
     title: "ÔN TẬP 15 PHÚT",
     api: "https://script.google.com/macros/s/AKfycbzs823Exjgop4XQHd90PVcjSMD3INg2j4V0Iy3uN0zAhZfvwHZIonpIEW0HdD8YOE4Y/exec",
@@ -144,7 +151,7 @@ function runOnce() {
 // ====================== LOAD DATA =========================
 async function loadData() {
   document.title = config.title;
-
+  document.body.classList.add("overflow-hidden");
   try {
     const res = await fetch(config.api);
     const data = await res.json();
