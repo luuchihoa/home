@@ -23,6 +23,7 @@ window.confirmExit = function() {
   cleanupQuizDOM();
   // dừng timer nếu có
   stopTimer?.();
+  document.body.classList.remove("overflow-hidden");
   document.getElementById('app').style.display='block';
   // Xóa HTML cũ
   document.getElementById("quiz-root").innerHTML = "";
