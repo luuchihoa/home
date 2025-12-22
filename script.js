@@ -60,11 +60,13 @@ window.toggleModal = function (show) {
       }
     });
 
+    lockBodyScroll();
     m.classList.add('show');
     m.setAttribute('aria-hidden', 'false');
     setTimeout(() => document.getElementById('username').focus(), 80);
   } else {
     document.activeElement.blur();
+    unlockBodyScroll();
     m.classList.remove('show');
     m.setAttribute('aria-hidden', 'true');
   }
