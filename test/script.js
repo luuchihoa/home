@@ -393,7 +393,8 @@ function showResults(choiceScore, essayScore, total) {
 
   // Send data safely (non-blocking)
   try { sendData(localStorage.username, total); } catch (e) { /* ignore */ }
-  winSound && winSound.play();
+  winSound.play();
+  winSound.currentTime = 0;
 }
 
 // ====================== START QUIZ =========================
