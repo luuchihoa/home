@@ -136,18 +136,6 @@ input[type='password'] {
   color: var(--text);
   font-size: clamp(14px, 1.4vw, 16px);
 }
-.btn {
-  margin-top: 8px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: none;
-  background: var(--accent);
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-  font-size: clamp(14px, 1.4vw, 16px);
-}
 
 /* ========== tabbar (mobile app style fixed bottom) ========== */
 .tabbar {
