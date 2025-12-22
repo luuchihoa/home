@@ -16,8 +16,6 @@
 .quiz-box {
   position: relative;
   max-width: 700px;
-  margin: 2rem auto;
-  padding: 2.5rem 3rem;
   background: linear-gradient(135deg, #e0f7fa, #ffffff);
   border-radius: 1.5rem;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
@@ -27,12 +25,6 @@
   max-height: 90vh;
   overflow-y: auto; /* scroll khi dài */
   z-index: 10;
-}
-@media (max-width: 768px) {
-  .quiz-box {
-    width: 90%;
-    padding: 2rem;
-  }
 }
 
 /* ==================== OPTION ==================== */
