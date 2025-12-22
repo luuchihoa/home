@@ -65,6 +65,7 @@ window.initQuiz = async function (type) {
 // ====================== LOAD DATA =========================
 async function loadData() {
   document.title = config.title;
+  document.body.classList.add("overflow-hidden");
   document.getElementById('start-box')?.classList?.add('hidden');
   document.querySelector('.header-text')?.classList?.remove('hidden');
   document.getElementById('thanhgia')?.classList?.add('hidden');
@@ -313,6 +314,7 @@ function showResults() {
     </div>
   `;
   winSound.play();
+  winSound.currentTime = 0;
   stopTimer();
   document.getElementById('retry-btn').onclick = () => {
     startQuiz();
