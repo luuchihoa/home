@@ -140,7 +140,7 @@
       </div>
 
         <!-- Tiêu đề -->
-        <h2 class="text-4xl font-extrabold text-white drop-shadow-lg mb-3">
+        <h2 class="md:text-4xl text-3xl font-extrabold text-white drop-shadow-lg mb-3">
           Sẵn Sàng Chưa?
         </h2>
 
@@ -163,24 +163,33 @@
 
     <!-- Card Quiz Box -->
     <div
-      class="relative w-full max-w-3xl bg-white glow-border shadow-2xl p-8 quiz-box hidden"
-    >
+  class="relative
+         w-[95vw]          /* mobile */
+         sm:w-[92vw]
+         md:w-[85vw]
+         lg:w-[75vw]
+         xl:w-[65vw]
+         max-w-none
+         bg-white glow-border shadow-2xl p-8 quiz-box hidden"
+>
+
+    <div
+    class="sticky top-0 flex justify-end pb-2">
       <!-- Exit Button -->
       <button
         onclick="openExitModal()"
-        class="absolute top-2 right-2 z-[150]
-               w-10 h-10 rounded-full
+        class="absolute md:-top-2 md:-right-2 -top-6 -right-6 w-10 h-10 rounded-full
                bg-black/60 text-white
                hover:bg-red-600
                flex items-center justify-center
                shadow-lg transition"
       >
         ✕
-      </button>
+      </button></div>
 
       <!-- Tiêu đề -->
       <h1
-        class="header-quiz title-quiz text-4xl md:text-5xl font-extrabold text-center text-orange-500 mb-4"
+        class="header-quiz title-quiz text-2xl md:text-4xl font-extrabold text-center text-orange-500 mb-4"
       >ÔN TẬP 15 PHÚT</h1>
 
       <h2
