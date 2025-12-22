@@ -79,6 +79,7 @@ window.toggleUserModal = function (show) {
     m.classList.add('show');
     m.removeAttribute('inert');
     m.setAttribute('aria-hidden', 'false');
+    lockBodyScroll();
 
     setTimeout(() => {
       const focusTarget =
@@ -100,6 +101,7 @@ window.toggleUserModal = function (show) {
       m.classList.remove("show");
       m.setAttribute('inert', '');
       m.setAttribute('aria-hidden', 'true');
+      unlockBodyScroll();
     }
   }
 };
@@ -262,3 +264,10 @@ function loadPage(id, file, callback) {
     });
 }
 
+function lockBodyScroll() {
+  document.body.classList.add("overflow-hidden");
+}
+
+function unlockBodyScroll() {
+  document.body.classList.remove("overflow-hidden");
+}
