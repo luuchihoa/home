@@ -20,6 +20,7 @@ window.current = 0;
 window.scoreChoice = 0;
 window.totalTime = 0;
 
+window.quizEnded = false;
 window.timerRAF = null;
 window.questionLocked = false;
 window.lastSecond = null;
@@ -103,6 +104,15 @@ function onTimeUp() {
   questionLocked = true;
   handleAnswer();
 }
+
+function playSound(audio) {
+  if (!audio) return;
+  try {
+    audio.currentTime = 0;
+    audio.play().catch(()=>{});
+  } catch {}
+}
+
 function stopTimer() {
   if (timerRAF !== null) {
     cancelAnimationFrame(timerRAF);
@@ -208,8 +218,7 @@ function randomQuestion() {
 
 // called when per-question time runs out
 function handleTimeout() {
-  wrongSound.currentTime = 0;
-  wrongSound.play();
+  playSound(wrongSound);
   pushUnansweredAndNext();
 }
 
@@ -241,14 +250,12 @@ function loadQuestion() {
   document.querySelectorAll('.option').forEach(opt => {
     opt.addEventListener('mouseenter', () => 
     { 
-      hoverSound.play();    
-      hoverSound.currentTime = 0;
+      playSound(hoverSound);
     });
     opt.addEventListener('click', () => {
       if (questionLocked) return; // ✅ chặn click trễ
       questionLocked = true;
-      selectSound.play();
-      selectSound.currentTime = 0;
+      playSound(selectSound);
       handleAnswer(opt.dataset.key);
     });
   });
@@ -257,6 +264,7 @@ function loadQuestion() {
     handleAnswer();
   };
   finishBtn.onclick = () => {
+    stopTimmer();
     showResults();
   }
   // start per-question timer
@@ -266,7 +274,6 @@ function loadQuestion() {
 
 // ====================== CHECK ĐÁP ÁN =========================
 function handleAnswer(selectedKey=null) {
-
   const q = quizQuestions[current];
 
   document.querySelectorAll('.option').forEach(btn => {
@@ -279,11 +286,9 @@ function handleAnswer(selectedKey=null) {
 
   if (selectedKey === q.correct) {
     scoreChoice++;
-    correctSound.play();
-    correctSound.currentTime = 0;
+    playSound(correctSound);
   } else {
-    wrongSound.play();
-    wrongSound.currentTime = 0;
+    playSound(wrongSound);
   }
   lockOptions();
   lockSkip();
@@ -303,6 +308,10 @@ function nextQuestion() {
 
 // ====================== KẾT QUẢ =========================
 function showResults() {
+  if (quizEnded) return;   // ⛔ CHỐT
+  quizEnded = true;
+  playSound(winSound);
+  
   quizBox.style.display='none';
   quizBox1.style.display='block';
   const score = ((scoreChoice / quizQuestions.length) * 10).toFixed(1);
@@ -313,9 +322,6 @@ function showResults() {
       <button id="retry-btn" class="px-6 py-2 bg-gray-400 text-white rounded-xl">Làm lại</button>
     </div>
   `;
-  winSound.play();
-  winSound.currentTime = 0;
-  stopTimer();
   document.getElementById('retry-btn').onclick = () => {
     startQuiz();
   };
@@ -332,7 +338,8 @@ function startQuiz() {
   document.getElementById('loading-box').style.display = 'none';
   document.getElementById('thanhgia')?.classList?.remove('hidden');
   quizBox.style.display = 'block';
-
+  
+  quizEnded = false; // ✅ reset cờ
   totalTime = config.time;
   current = 0;
   scoreChoice = 0;
