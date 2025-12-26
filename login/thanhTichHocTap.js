@@ -173,7 +173,6 @@ function renderAttendanceMobile(attendanceArray) {
     } else if (value === 3) {
       dot.classList.add("bg-blue-300");
       dot.title = "Ngày Nghỉ Lễ";
-      totalAbsent++;
     } else {
       dot.classList.add("bg-gray-300", "border", "border-dashed");
       dot.title = "Chưa có dữ liệu";
