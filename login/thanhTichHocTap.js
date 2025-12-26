@@ -89,8 +89,6 @@ function renderAttendance(attendanceArray) {
   monthRow.querySelectorAll("th.week").forEach(e => e.remove());
   bodyRow.querySelectorAll("td.week").forEach(e => e.remove());
 
-  let totalAbsent = 0;
-
   attendanceArray.forEach((value, index) => {
     const week = index + 1;
     const sunday = new Date(start);
@@ -121,11 +119,9 @@ function renderAttendance(attendanceArray) {
     } else if (value === 1) {
       dot.classList.add("bg-yellow-400");
       dot.title = "Nghỉ có phép";
-      totalAbsent++;
     } else if (value === 2) {
       dot.classList.add("bg-red-500");
       dot.title = "Nghỉ không phép";
-      totalAbsent++;
     } else if (value === 3) {
       dot.classList.add("bg-blue-300");
       dot.title = "Ngày Nghỉ Lễ";
@@ -137,15 +133,11 @@ function renderAttendance(attendanceArray) {
     td.appendChild(dot);
     bodyRow.insertBefore(td, totalCell);
   });
-
-  totalCell.textContent = totalAbsent + " buổi";
 }
 function renderAttendanceMobile(attendanceArray) {
   const grid = document.getElementById("attendance-grid");
-  const totalEl = document.getElementById("attendance-total-mobile");
 
   grid.innerHTML = "";
-  let totalAbsent = 0;
 
   attendanceArray.forEach((value, index) => {
     const week = index + 1;
@@ -165,11 +157,9 @@ function renderAttendanceMobile(attendanceArray) {
     } else if (value === 1) {
       dot.classList.add("bg-yellow-400");
       dot.title = "Nghỉ có phép";
-      totalAbsent++;
     } else if (value === 2) {
       dot.classList.add("bg-red-500");
       dot.title = "Nghỉ không phép";
-      totalAbsent++;
     } else if (value === 3) {
       dot.classList.add("bg-blue-300");
       dot.title = "Ngày Nghỉ Lễ";
@@ -186,8 +176,6 @@ function renderAttendanceMobile(attendanceArray) {
     item.appendChild(label);
     grid.appendChild(item);
   });
-
-  totalEl.textContent = totalAbsent;
 }
 const RANK_COLORS = {
   hocLuc: {
