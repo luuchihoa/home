@@ -62,7 +62,7 @@ function unloadQuizCSS(data='quiz') {
 window.unloadQuizCSS = unloadQuizCSS;
 
 window.openPVDetail = function (name) {
-  document.getElementById('app').style.display='none';
+  document.getElementById('app')?.classList?.add('hidden');
   unloadQuizCSS();
   if (name === '15 Phút - HK1') {
     loadQuizPage('15phut-hk1');
