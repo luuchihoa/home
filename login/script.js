@@ -1,5 +1,4 @@
 const API_URL = 'https://script.google.com/macros/s/AKfycbxGHSrh9HCFcKxfPqDnmYuMRxRHeoIeztowkZ6km8SKiJikm0AXioNWek97vhUlO6A/exec';
-
 window.login = async function () {
   const username = document.getElementById('username').value.trim();
   const password = document.getElementById('password').value.trim();
@@ -17,6 +16,7 @@ window.login = async function () {
   const result = await res.json();
   if (result.success) {
     message.textContent = 'Đăng nhập thành công ✔';
+    loadModalUser();
     localStorage.setItem('username', username);
     loadUser();
     setTimeout(() => {
@@ -185,6 +185,21 @@ function showAvatarLoading(show) {
   img.classList.toggle("opacity-50", show);
 }
 // LOAD PROFILE
+let loaded = false;
+async function loadModalUser() {
+  if (!loaded) {
+    const box = document.getElementById("modal-user");
+    // ✅ load HTML
+    const html = await fetch("./login/modalUser.html").then(r => r.text());
+    box.innerHTML = html;
+    // ✅ load JS kèm theo
+    const script = document.createElement("script");
+    script.src = "./login/thanhTichHocTap.js";
+    script.defer = true;
+    document.body.appendChild(script);
+    loaded = true;
+  }
+} window.loadModalUser =loadModalUser;
 let userDraft = null;
 window.loadUser = async function() {
   const username = localStorage.getItem("username");
@@ -232,8 +247,7 @@ function renderUser(data) {
   document.getElementById("gioiTinhText").textContent = data.gioiTinh;
   document.getElementById("usernameText").textContent = data.username;
   document.getElementById("avatarImg").src = data.avatar||'https://lh3.googleusercontent.com/d/147OrvzPCi6r0aSk0ydi4HxS04G9ZZDEA';
-console.log('run1');
-}
+} window.renderUser =renderUser;
 // Format Date to View
 function transferDateForView(value) {
   if (!value) return "";
@@ -445,7 +459,7 @@ document.addEventListener("keydown", function (e) {
 
   // Sau đó mới tới modal cha
   if (isUserModalOpen) {
-    toggleUserModal(!isUserModalOpen);
+    toggleUserModal(false);
   }
 });
 
@@ -492,32 +506,7 @@ window.submitChangePassword = async function () {
     console.error(err);
   }
 }
-function changePassword(username, oldPassword, newPassword) {
-  const sheet = getSheet();
-  const rows = sheet.getDataRange().getValues();
 
-  for (let i = 1; i < rows.length; i++) {
-    if (rows[i][0] === username) {
-      const oldHash = Utilities.computeDigest(
-        Utilities.DigestAlgorithm.SHA_256,
-        oldPassword
-      ).map(b => ('0' + (b & 0xFF).toString(16)).slice(-2)).join('');
-
-      if (oldHash !== rows[i][1]) {
-        return json({ success: false, error: "Mật khẩu cũ không đúng" });
-      }
-
-      const newHash = Utilities.computeDigest(
-        Utilities.DigestAlgorithm.SHA_256,
-        newPassword
-      ).map(b => ('0' + (b & 0xFF).toString(16)).slice(-2)).join('');
-
-      sheet.getRange(i + 1, 2).setValue(newHash);
-      return json({ success: true });
-    }
-  }
-  return json({ success: false, error: "User không tồn tại" });
-}
 window.togglePasswordView = function (inputId, btn) {
   const input = document.getElementById(inputId);
   if (!input) return;
