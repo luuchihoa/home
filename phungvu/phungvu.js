@@ -1,5 +1,4 @@
 
-
 // ======================== LOAD QUIZ PAGE =========================
 function loadQuizPage(type) {
   let pageName;
