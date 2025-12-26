@@ -1,3 +1,4 @@
+
 window.switchTab = function (e) {
   const btn = e.currentTarget;
   const target = btn.dataset.target;
@@ -17,18 +18,18 @@ window.switchTabOnProfile = function switchTabOnProfile(tab) {
 
   // reset style
   [tabProfile, tabAchievement].forEach(btn => {
-    btn.classList.remove('bg-white', 'text-orange-600', 'shadow');
-    btn.classList.add('text-gray-500');
+    btn.classList.remove('bg-white', 'text-orange-600', 'shadow-sm', 'ring-1', 'ring-orange-200');
+    btn.classList.add('text-gray-400', 'hover:text-orange-600', 'hover:bg-white/70');
   });
 
   if (tab === 'profile') {
-    tabProfile.classList.add('bg-white', 'text-orange-600', 'shadow');
+    tabProfile.classList.add('bg-white', 'text-orange-600', 'shadow-sm', 'ring-1', 'ring-orange-200');
     document.getElementById('profile')?.classList?.remove("hidden");
     document.getElementById('achievement')?.classList?.add("hidden");
   }
 
   if (tab === 'achievement') {
-    tabAchievement.classList.add('bg-white', 'text-orange-600', 'shadow');
+    tabAchievement.classList.add('bg-white', 'text-orange-600', 'shadow-sm', 'ring-1', 'ring-orange-200');
     document.getElementById('profile')?.classList?.add("hidden");
     document.getElementById('achievement')?.classList?.remove("hidden");
   }
@@ -77,6 +78,7 @@ window.toggleUserModal = function (show) {
   if (!m) return;
 
   if (show) {
+    loadSemesterData("HK1");
     isSaveHidden = true;
     m.classList.add('show');
     m.removeAttribute('inert');
@@ -195,22 +197,35 @@ window.addEventListener('scroll', () => {
       name: "noel",
       from: "12-1",
       to:   "1-15",
-      pc:   "./photo/background/chrismax_pc.jpg",
-      mobile: "./photo/background/chrismax_mobile.jpg"
+      pc:   "https://lh3.googleusercontent.com/d/1r8SDijseJIHfNwYL3ccPmuQ8TmzBFNtc",
+      mobile: "https://lh3.googleusercontent.com/d/1Xjjjgn0355YzYMlXTpJDeRE6OyaqE7ys"
     },
     {
       name: "phucsinh",
       from: "03-22",
       to:   "04-30",
-      pc:   "./photo/background/phucsinh_pc.jpg",
-      mobile: "./photo/background/phucsinh_mobile.jpg"
+      pc:   "https://lh3.googleusercontent.com/d/1dWAhu4xYQMC1wnaXHho48f8Qg48UmqPd",
+      mobile: "https://lh3.googleusercontent.com/d/1TEP1pUpCR7oc9ZqtYNf3WTSVP4vLBkt_"
     }
   ];
 
   function inRange(from, to) {
     const year = today.getFullYear();
-    const start = new Date(`${year}-${from}`);
-    const end   = new Date(`${year}-${to}`);
+
+    let start = new Date(`${year}-${from}`);
+    let end   = new Date(`${year}-${to}`);
+
+    // nếu khoảng thời gian qua năm (vd: 12 → 1)
+    if (start > end) {
+      // nếu đang ở tháng 1 → start thuộc năm trước
+      if (today.getMonth() === 0) {
+        start = new Date(`${year - 1}-${from}`);
+      } else {
+        // nếu đang ở tháng 12 → end thuộc năm sau
+        end = new Date(`${year + 1}-${to}`);
+      }
+    }
+
     return today >= start && today <= end;
   }
 
@@ -224,8 +239,8 @@ window.addEventListener('scroll', () => {
 
   if (!bg) {
     bg = isMobile
-      ? "./photo/background/bg_mobile.jpg"
-      : "./photo/background/bg_pc.jpg";
+      ? "https://lh3.googleusercontent.com/d/15GTxjKJt_2thHr-fo8gmNVXkFvSWUor4"
+      : "https://lh3.googleusercontent.com/d/1HK_o0VChFjTHiTEVbStsrZcC72bhRN4n";
   }
 
   document.body.style.background = `
@@ -237,10 +252,10 @@ window.addEventListener('scroll', () => {
 window.setProfileDefaut = function() {
   document.getElementById("hoTenText").textContent = localStorage.hoTen;
   document.getElementById("tenThanhText").textContent = localStorage.tenThanh;
-  document.getElementById("ngaySinhText").textContent = (localStorage.ngaySinh);
-  document.getElementById("ngayRuaToiText").textContent = (localStorage.ngayRuaToi);
-  document.getElementById("ngayThemSucText").textContent = (localStorage.ngayThemSuc);
-  document.getElementById("ngayRuocLeText").textContent = (localStorage.ngayRuocLe);
+  document.getElementById("ngaySinhText").textContent = localStorage.ngaySinh;
+  document.getElementById("ngayRuaToiText").textContent = localStorage.ngayRuaToi;
+  document.getElementById("ngayThemSucText").textContent = localStorage.ngayThemSuc;
+  document.getElementById("ngayRuocLeText").textContent = localStorage.ngayRuocLe;
   document.getElementById("tenChaText").textContent = localStorage.tenCha;
   document.getElementById("tenMeText").textContent = localStorage.tenMe;
   document.getElementById("sdtText").textContent = localStorage.sdt;
@@ -250,8 +265,10 @@ window.setProfileDefaut = function() {
   document.getElementById("avatarImg").src = localStorage.avatar;
 }
 if(localStorage.getItem('username')){
-  setProfileDefaut();
-  updateLoginTab();
+  loadModalUser().then(()=>{
+    setProfileDefaut();
+    updateLoginTab();
+  });
 }
 function loadPage(id, file, callback) {
   fetch(file)
