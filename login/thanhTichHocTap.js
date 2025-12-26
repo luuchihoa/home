@@ -50,7 +50,8 @@ window.loadSemesterData = async function (semester) {
 
   document.querySelectorAll("[data-field]").forEach(el => {
     const field = el.dataset.field;
-    el.textContent = student?.[field]||"-";
+    const value = student?.[field];
+    el.textContent = value === 0 ? 0 : value ? value : "-";
   });
   document.querySelectorAll(".total-week").forEach(el => {
     el.textContent = student.attendance.length;
