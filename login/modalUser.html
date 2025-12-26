@@ -1,0 +1,502 @@
+<div class="relative w-full max-w-4xl bg-white/90 backdrop-blur-xl rounded-3xl
+  shadow-[0_20px_50px_rgba(0,0,0,0.08)] py-4 px-2 md:p-8 max-h-[90vh] overflow-y-auto">
+  <!-- Exit Button -->
+  <button
+    onclick="openExitModal()"
+    class="absolute top-4 right-4 z-[150]
+           w-10 h-10 rounded-full
+           bg-black/20 text-white
+           hover:bg-red-600
+           flex items-center justify-center
+           shadow-lg transition"
+    >
+    ✕
+  </button>
+  <!-- HEADER -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+
+    <!-- AVATAR (mobile trên, desktop phải) -->
+    <div class="relative self-center sm:order-2 px-8">
+      <img
+        id="avatarImg"
+        class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-orange-400"
+      />
+      <button
+        onclick="selectAvatar()"
+        class="absolute bottom-0 right-4 bg-orange-500 text-white p-1.5 sm:p-2 rounded-full shadow hover:bg-orange-600"
+      >
+        ✏️
+      </button>
+    </div>
+
+    <!-- TABS -->
+    <div class="flex flex-col sm:flex-row gap-2 bg-gray-100 rounded-xl p-1 sm:p-1.5 sm:order-1">
+
+      <button
+        id="tabProfile"
+        onclick="switchTabOnProfile('profile')"
+        class="w-full sm:w-auto px-4 py-2 rounded-lg text-sm font-semibold transition
+               bg-white text-orange-600 shadow-sm ring-1 ring-orange-200"
+      >
+        Hồ sơ cá nhân
+      </button>
+
+      <button
+        id="tabAchievement"
+        onclick="switchTabOnProfile('achievement')"
+        class="w-full sm:w-auto px-4 py-2 rounded-lg text-sm font-semibold transition
+               text-gray-400 hover:text-orange-600 hover:bg-white/70"
+      >
+        Thành tích học tập
+      </button>
+
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div id="profile" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+    <!-- TÊN -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl gen-icon">👤</span>
+        <div>
+          <div class="text-sm text-gray-500">Họ và tên</div>
+          <div class="text-lg font-semibold text-gray-800" id="hoTenText">
+            Nguyễn Văn A
+          </div>
+        </div>
+      </div>
+      <button
+        onclick="editField('hoTen')"
+        class="text-gray-400 hover:text-orange-500 transition"
+      >
+        ✏️
+      </button>
+    </div>
+
+    <!-- TÊN THÁNH -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">✝️</span>
+        <div>
+          <div class="text-sm text-gray-500">Tên Thánh</div>
+          <div class="text-lg font-semibold" id="tenThanhText">Giuse</div>
+        </div>
+      </div>
+      <button onclick="editField('tenThanh')">✏️</button>
+    </div>
+
+    <!-- NGÀY SINH -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">🎂</span>
+        <div>
+          <div class="text-sm text-gray-500">Ngày sinh</div>
+          <div class="text-lg font-semibold" id="ngaySinhText">01/01/2005</div>
+        </div>
+      </div>
+      <button onclick="editField('ngaySinh')">✏️</button>
+    </div>
+
+    <!-- NGÀY RỬA TỘI -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">💦</span>
+        <div>
+          <div class="text-sm text-gray-500">Ngày Rửa Tội</div>
+          <div class="text-lg font-semibold" id="ngayRuaToiText">15/03/2005</div>
+        </div>
+      </div>
+      <button onclick="editField('ngayRuaToi')">✏️</button>
+    </div>
+
+    <!-- NGÀY RƯỚC LỄ -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">🫓</span>
+        <div>
+          <div class="text-sm text-gray-500">Ngày Rước Lễ</div>
+          <div class="text-lg font-semibold" id="ngayRuocLeText">20/05/2014</div>
+        </div>
+      </div>
+      <button onclick="editField('ngayRuocLe')">✏️</button>
+    </div>
+
+    <!-- NGÀY THÊM SỨC -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">🕊️</span>
+        <div>
+          <div class="text-sm text-gray-500">Ngày Thêm Sức</div>
+          <div class="text-lg font-semibold" id="ngayThemSucText">20/05/2014</div>
+        </div>
+      </div>
+      <button onclick="editField('ngayThemSuc')">✏️</button>
+    </div>
+
+    <!-- HỌ & TÊN CHA -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">👨🏻</span>
+        <div>
+          <div class="text-sm text-gray-500">Họ & Tên Cha</div>
+          <div class="text-lg font-semibold" id="tenChaText">Nguyễn Văn B</div>
+        </div>
+      </div>
+      <button onclick="editField('tenCha')">✏️</button>
+    </div>
+
+    <!-- HỌ & TÊN MẸ -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">👩🏻</span>
+        <div>
+          <div class="text-sm text-gray-500">Họ & Tên Mẹ</div>
+          <div class="text-lg font-semibold" id="tenMeText">Trần Thị C</div>
+        </div>
+      </div>
+      <button onclick="editField('tenMe')">✏️</button>
+    </div>
+
+    <!-- SỐ ĐIỆN THOẠI -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">📞</span>
+        <div>
+          <div class="text-sm text-gray-500">Số điện thoại</div>
+          <div class="text-lg font-semibold" id="sdtText">0123 456 789</div>
+        </div>
+      </div>
+      <button onclick="editField('sdt')">✏️</button>
+    </div>
+
+    <!-- GIÁO XÓM -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">🏠</span>
+        <div>
+          <div class="text-sm text-gray-500">Giáo Xóm</div>
+          <div class="text-lg font-semibold" id="giaoXomText">Xóm Gò</div>
+        </div>
+      </div>
+      <button onclick="editField('giaoXom')">✏️</button>
+    </div>
+
+    <!-- GIỚI TÍNH -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">⚧️</span>
+        <div>
+          <div class="text-sm text-gray-500">Giới tính</div>
+          <div class="text-lg font-semibold" id="gioiTinhText">Nam</div>
+        </div>
+      </div>
+      <button onclick="editField('gioiTinh')" class="text-orange-500 hover:text-orange-600">
+        ✏️
+      </button>
+    </div>
+
+    <!-- USER NAME -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">🆔</span>
+        <div>
+          <div class="text-sm text-gray-500">Username</div>
+          <div class="text-lg font-semibold" id="usernameText">admin</div>
+        </div>
+      </div>
+      <!-- LOGOUT -->
+      <button
+        onclick="logout()"
+        class="text-sm px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition"
+      >
+        Logout
+      </button>
+    </div>
+
+    <!-- PASSWORD -->
+    <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
+      <div class="flex items-center gap-4">
+        <span class="text-2xl">🔒</span>
+        <div>
+          <div class="text-sm text-gray-500">Mật khẩu</div>
+          <div class="text-lg font-semibold" id="passwordText">••••••••</div>
+          
+        </div>
+      </div>
+      <button
+        class="text-sm text-orange-600 font-semibold hover:underline"
+        onclick="openChangePassword()"
+      >
+        Đổi
+      </button>
+    </div>
+    <!-- SAVE BUTTON -->
+    <div class="flex justify-end mt-6">
+      <button
+        id="btnSaveProfile"
+        onclick="openConfirmSave()"
+        class="px-6 py-2 rounded-xl bg-orange-500 text-white font-semibold
+               hover:bg-orange-600 active:scale-95 transition
+               disabled:bg-gray-300 disabled:cursor-not-allowed"
+      >
+        💾 Lưu thay đổi
+      </button>
+    </div>
+    
+  </div>
+  <!-- THÀNH TÍCH HỌC TẬP -->
+  <div id="achievement" class="hidden space-y-6">
+    <!-- ================= HEADER ================= -->
+    <div class="rounded-xl bg-white shadow-sm sticky -top-4 md:-top-8 z-10">
+      <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-3">
+        <!-- TÊN -->
+        <h1 data-field="hoTen" class="text-2xl font-bold">Nguyễn Văn A</h1>
+        <!-- DÒNG DƯỚI -->
+        <div class="w-full flex items-center justify-between gap-4 md:max-w-7xl md:mx-auto">
+        <!-- LỚP + NĂM -->
+          <div class="text-sm text-gray-500 leading-tight">
+            <p>Lớp học: <b data-field="lopHoc">Phụng Vụ 1/2</b></p>
+            <p>Năm học: <b>2025 - 2026</b></p>
+          </div>
+        <!-- SELECT -->
+        <select id="semesterSelect" class="border rounded-lg px-3 py-2 text-sm hover:bg-blue-100">
+          <option value="HK1">Học kỳ I</option>
+          <option value="HK2">Học kỳ II</option>
+        </select>
+
+    </div>
+
+  </div>
+
+    </div>
+
+    <!-- ================= MAIN ================= -->
+    <div class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+      <!-- ================= SUMMARY ================= -->
+      <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white rounded-xl shadow p-5">
+          <p class="text-gray-500 text-sm">Điểm TB</p>
+          <p data-field="diemTB" class="text-3xl font-bold text-blue-600">7.8</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-5">
+          <p class="text-gray-500 text-sm">Học lực</p>
+          <p data-field="hocLuc" class="text-3xl font-bold text-green-600">Khá</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-5">
+          <p class="text-gray-500 text-sm">Hạnh kiểm</p>
+          <p data-field="hanhKiem" class="text-3xl font-bold text-green-600">Tốt</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow p-5">
+          <p class="text-gray-500 text-sm">Vị Thứ</p>
+          <p data-field="viThu" class="text-3xl font-bold">12 / 40</p>
+        </div>
+      </section>
+
+      <!-- ================= WARNING ================= -->
+      <div id="text-infor" class="bg-yellow-50 border border-yellow-200 rounded-xl p-4 text-yellow-800">
+        ⚠ Thông tin điểm thi và điểm danh đang cập nhật thêm
+      </div>
+      <!-- ================= ATTENDANCE ON PC ================= -->
+      <section class="hidden md:block bg-white rounded-xl shadow overflow-hidden">
+        <div class="px-6 py-4 border-b flex items-center justify-between">
+          <h2 class="text-xl font-semibold">Bảng điểm danh (<b class="total-week font-semibold"></b> tuần)</h2>
+          <span class="text-sm text-gray-500">Học kỳ I</span>
+        </div>
+
+        <!-- Legend -->
+        <div class="px-6 py-3 flex flex-wrap gap-4 text-sm">
+          <span class="flex items-center gap-2">
+            <span class="w-4 h-4 rounded bg-green-500"></span> Có mặt
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="w-4 h-4 rounded bg-yellow-400"></span> Nghỉ có phép
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="w-4 h-4 rounded bg-red-500"></span> Nghỉ không phép
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="w-4 h-4 rounded bg-blue-300"></span> Ngày nghỉ lễ
+          </span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-center text-sm ">
+            <thead class="bg-gray-100">
+              <tr id="attendance-head">
+                <th class="px-4 py-1 text-left">Ngày</th>
+                <!-- JS sẽ tự thêm ngày -->
+                <th class="font-semibold pr-2">Tổng</th>
+              </tr>
+              <tr id="attendance-month">
+                <th class="px-4 py-1 text-left">Tháng</th>
+                <!-- JS sẽ tự thêm tháng -->
+                <th class="font-semibold pr-2">nghỉ</th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y">
+              <tr id="attendance-row" class="hover:bg-gray-50">
+                <td class="px-4 py-3 text-left font-medium">Trạng thái</td>
+                <!-- JS sẽ tự thêm ô -->
+                <td id="attendance-total" class="font-semibold text-red-600 pr-2">1 Buổi</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+      <!-- ========== ATTENDANCE MOBILE GRID ========== -->
+      <section class="bg-white rounded-xl shadow p-4 md:hidden">
+        <h2 class="text-lg font-semibold mb-4">Điểm danh (<b class="total-week font-semibold"></b> tuần)</h2>
+
+        <!-- Legend -->
+        <div class="grid grid-cols-[2fr_3fr] text-sm mb-4">
+          <span class="flex items-center gap-2">
+            <span class="w-4 h-4 rounded bg-green-500"></span>Có mặt
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="w-4 h-4 rounded bg-yellow-400"></span>Nghỉ phép
+          </span>
+          <span class="flex items-center gap-2">
+            <span class="w-4 h-4 rounded bg-blue-300"></span>Nghỉ lễ
+          </span>
+          <span class="flex items-center gap-2 whitespace-nowrap">
+            <span class="w-4 h-4 rounded bg-red-500"></span>Nghỉ không phép
+          </span>
+        </div>
+
+        <!-- Grid -->
+        <div id="attendance-mobile" class="md:hidden space-y-3">
+
+          <!-- GRID TUẦN -->
+          <div id="attendance-grid"
+               class="grid grid-cols-5 gap-3 justify-items-center">
+            <!-- JS tự sinh -->
+          </div>
+        </div>
+
+
+        <!-- Summary -->
+        <div class="mt-4 text-sm">
+          ❌ Nghỉ không phép: <strong data-field="nghiKhongPhep" class="text-red-600">1 buổi</strong><br>
+          ⚠ Nghỉ có phép: <strong data-field="nghiCoPhep" class="text-yellow-600">2 buổi</strong>
+        </div>
+
+        <!-- TỔNG NGHỈ -->
+        <div class=" font-semibold text-red-600">
+          Tổng nghỉ: <span id="attendance-total-mobile">0</span> buổi
+        </div>
+      </section>
+
+      <!-- ================= TABLE DESKTOP ================= -->
+      <section class="hidden md:block bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div class="px-6 py-5 border-b flex items-center justify-between">
+          <h2 class="text-xl font-semibold">Bảng điểm chi tiết</h2>
+          <span class="text-sm text-gray-500">Học kỳ I</span>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="min-w-full text-sm text-center">
+            <thead class="bg-gray-100 text-gray-600 uppercase tracking-wide">
+              <tr>
+                <th class="px-6 py-4 text-left">Môn học</th>
+                <th>Miệng</th>
+                <th>Vở</th>
+                <th>15'</th>
+                <th>1 Tiết</th>
+                <th>Thi</th>
+                <th class="font-bold">TBM</th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y">
+              <tr class="hover:bg-blue-50 transition cursor-pointer">
+                <td class="px-6 py-4 text-left font-semibold">
+                  Phụng Vụ
+                </td>
+                <td data-field="diemMieng">9</td>
+                <td data-field="diemVo">9</td>
+                <td data-field="diem15Phut">7</td>
+                <td data-field="diem1Tiet">8</td>
+                <td data-field="diemThi">7</td>
+                <td data-field="diemTB" class="font-bold text-blue-600 text-lg">7.8</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ================= TABLE MOBILE ================= -->
+      <section class="md:hidden space-y-4">
+        <h2 class="text-lg font-semibold">Bảng điểm chi tiết</h2>
+
+        <!-- Card môn học -->
+        <div class="bg-white rounded-2xl shadow-lg p-4">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-base font-semibold">Môn học: Phụng Vụ</h3>
+            <span class="bg-blue-100 text-blue-600 font-bold px-3 py-1 rounded-full">
+              TBM <span data-field="diemTB">7.8</span>
+            </span>
+          </div>
+
+          <div class="grid grid-cols-3 gap-3 text-center text-sm">
+            <div class="bg-gray-50 rounded-lg p-2">
+              <p class="text-gray-500">Miệng</p>
+              <p data-field="diemMieng" class="font-semibold">9</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-2">
+              <p class="text-gray-500">Vở</p>
+              <p data-field="diemVo" class="font-semibold">7</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-2">
+              <p class="text-gray-500">15'</p>
+              <p data-field="diem15Phut" class="font-semibold">7</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-2">
+              <p class="text-gray-500">1 tiết</p>
+              <p data-field="diem1Tiet" class="font-semibold">8</p>
+            </div>
+            <div class="bg-gray-50 rounded-lg p-2">
+              <p class="text-gray-500">Thi</p>
+              <p data-field="diemThi" class="font-semibold">8</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= Nhận xét ================= -->
+      <div id="text-comment" class="hidden mt-4 bg-gray-50 border rounded-lg p-4">
+        📝 <strong>Nhận xét giáo viên:</strong>
+        <p id="gl-comment" class="text-gray-700 mt-1">
+        </p>
+      </div>
+      <!-- ================= Lời Chúa & Lời Chúc ================= -->
+      <div class="max-w-xl mx-auto bg-white rounded-3xl shadow-lg p-6 text-center border border-pink-100">
+        <div class="text-5xl mb-4">🌸</div>
+
+        <p class="text-lg md:text-xl font-semibold text-gray-700 leading-relaxed italic">
+          “Mọi việc anh em làm,<br>
+          hãy làm trong tình yêu thương.”
+        </p>
+
+        <p class="mt-2 text-sm text-gray-400">(1 Cr 16,14)</p>
+
+        <div class="mt-6 bg-pink-50 rounded-xl p-4">
+          <p class="text-pink-600 font-medium">
+            Chúc các bạn học giỏi, sống tốt  
+            <br class="hidden sm:block">
+            và lan tỏa yêu thương qua từng việc làm mỗi ngày 💖
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
