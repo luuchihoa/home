@@ -24,7 +24,7 @@ window.confirmExit = function() {
   // dừng timer nếu có
   stopTimer?.();
   document.body.classList.remove("overflow-hidden");
-  document.getElementById('app').style.display='block';
+  document.getElementById('app')?.classList.remove('hidden');
   // Xóa HTML cũ
   document.getElementById("quiz-root").innerHTML = "";
 }
