@@ -10,8 +10,6 @@
 
     <!-- LINK CSS -->
     <link rel="stylesheet" href="style.css" data-dynamic='quiz'/>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7760298764575590"
-     crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -19,7 +17,7 @@
       <!-- header -->
       <header class="main-header">
         <div class="header-inner">
-          <img src="photo/logo.jpg" alt="Giáo xứ An Ngãi" class="header-logo" />
+          <img src="https://lh3.googleusercontent.com/d/1oiEnPzSGOiliggoiteJR4N2lfjdw4lLE" alt="Giáo xứ An Ngãi" class="header-logo" />
 
           <div class="header-text-container">
             <div class="header-text">GIÁO XỨ AN NGÃI</div>
@@ -39,7 +37,7 @@
           <div class="card-grid">
             <div class="home-card" onclick="openDetail('Khối Kinh Thánh')">
               <div class="home-card-inner">
-                <img src="photo/kinhthanh.jpg" alt="Kinh Thánh" />
+                <img src="https://lh3.googleusercontent.com/d/1uA0OxFQ-wIbl39uEIn6wAybWCqpNqutc" alt="Kinh Thánh" />
                 <h3>Khối Kinh Thánh</h3>
                 <p>Học hỏi Lời Chúa...</p>
               </div>
@@ -47,7 +45,7 @@
 
             <div class="home-card" onclick="openDetail('Khối Phụng Vụ')">
               <div class="home-card-inner">
-                <img src="photo/phungvu.jpg" alt="Phụng Vụ" />
+                <img src="https://lh3.googleusercontent.com/d/1sVKWUGTiMvhwoml1qsdmahfLYFML-NGV" alt="Phụng Vụ" />
                 <h3>Khối Phụng Vụ</h3>
                 <p>Ôn tập kiến thức Phụng Vụ...</p>
               </div>
@@ -55,7 +53,7 @@
 
             <div class="home-card" onclick="openDetail('Khối Thêm Sức')">
               <div class="home-card-inner">
-                <img src="photo/themsuc.jpg" alt="Thêm Sức" />
+                <img src="https://lh3.googleusercontent.com/d/1tnxBqhr_su9_FgK6zdSkLa4h-w7CAlKJ" alt="Thêm Sức" />
                 <h3>Khối Thêm Sức</h3>
                 <p>Chuẩn bị lãnh nhận Bí Tích...</p>
               </div>
@@ -156,255 +154,7 @@
 
       <!-- MODAL USER INFO -->
       <div id="modal-user" class="modal" aria-hidden="true" >
-        <div class="relative w-full max-w-4xl bg-white rounded-2xl shadow-xl p-8 max-h-[90vh] overflow-y-auto">
-            <!-- Exit Button -->
-          <button
-            onclick="openExitModal()"
-            class="absolute top-4 right-4 z-[150]
-                   w-10 h-10 rounded-full
-                   bg-black/20 text-white
-                   hover:bg-red-600
-                   flex items-center justify-center
-                   shadow-lg transition"
-            >
-            ✕
-          </button>
-          <!-- HEADER -->
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-
-            <!-- AVATAR (mobile trên, desktop phải) -->
-            <div class="relative self-center sm:order-2 px-8">
-              <img
-                id="avatarImg"
-                class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover border-4 border-orange-400"
-              />
-              <button
-                onclick="selectAvatar()"
-                class="absolute bottom-0 right-4 bg-orange-500 text-white p-1.5 sm:p-2 rounded-full shadow hover:bg-orange-600"
-              >
-                ✏️
-              </button>
-            </div>
-
-            <!-- TABS -->
-            <div class="flex flex-col sm:flex-row gap-2 bg-gray-100 rounded-xl p-1 sm:p-1.5 sm:order-1">
-
-              <button
-                id="tabProfile"
-                onclick="switchTabOnProfile('profile')"
-                class="w-full sm:w-auto px-4 py-2 rounded-lg text-sm font-semibold transition
-                       bg-white text-orange-600 shadow"
-              >
-                Hồ sơ cá nhân
-              </button>
-
-              <button
-                id="tabAchievement"
-                onclick="switchTabOnProfile('achievement')"
-                class="w-full sm:w-auto px-4 py-2 rounded-lg text-sm font-semibold transition
-                       text-gray-500 hover:text-orange-500"
-              >
-                Thành tích học tập
-              </button>
-
-            </div>
-          </div>
-
-          <!-- INFO GRID -->
-          <div id="profile" class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-            <!-- TÊN -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl gen-icon">👤</span>
-                <div>
-                  <div class="text-sm text-gray-500">Họ và tên</div>
-                  <div class="text-lg font-semibold text-gray-800" id="hoTenText">
-                    Nguyễn Văn A
-                  </div>
-                </div>
-              </div>
-              <button
-                onclick="editField('hoTen')"
-                class="text-gray-400 hover:text-orange-500 transition"
-              >
-                ✏️
-              </button>
-            </div>
-
-            <!-- TÊN THÁNH -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">✝️</span>
-                <div>
-                  <div class="text-sm text-gray-500">Tên Thánh</div>
-                  <div class="text-lg font-semibold" id="tenThanhText">Giuse</div>
-                </div>
-              </div>
-              <button onclick="editField('tenThanh')">✏️</button>
-            </div>
-
-            <!-- NGÀY SINH -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">🎂</span>
-                <div>
-                  <div class="text-sm text-gray-500">Ngày sinh</div>
-                  <div class="text-lg font-semibold" id="ngaySinhText">01/01/2005</div>
-                </div>
-              </div>
-              <button onclick="editField('ngaySinh')">✏️</button>
-            </div>
-
-            <!-- NGÀY RỬA TỘI -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">💦</span>
-                <div>
-                  <div class="text-sm text-gray-500">Ngày Rửa Tội</div>
-                  <div class="text-lg font-semibold" id="ngayRuaToiText">15/03/2005</div>
-                </div>
-              </div>
-              <button onclick="editField('ngayRuaToi')">✏️</button>
-            </div>
-
-            <!-- NGÀY RƯỚC LỄ -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">🫓</span>
-                <div>
-                  <div class="text-sm text-gray-500">Ngày Rước Lễ</div>
-                  <div class="text-lg font-semibold" id="ngayRuocLeText">20/05/2014</div>
-                </div>
-              </div>
-              <button onclick="editField('ngayRuocLe')">✏️</button>
-            </div>
-
-            <!-- NGÀY THÊM SỨC -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">🕊️</span>
-                <div>
-                  <div class="text-sm text-gray-500">Ngày Thêm Sức</div>
-                  <div class="text-lg font-semibold" id="ngayThemSucText">20/05/2014</div>
-                </div>
-              </div>
-              <button onclick="editField('ngayThemSuc')">✏️</button>
-            </div>
-
-            <!-- HỌ & TÊN CHA -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">👨🏻</span>
-                <div>
-                  <div class="text-sm text-gray-500">Họ & Tên Cha</div>
-                  <div class="text-lg font-semibold" id="tenChaText">Nguyễn Văn B</div>
-                </div>
-              </div>
-              <button onclick="editField('tenCha')">✏️</button>
-            </div>
-
-            <!-- HỌ & TÊN MẸ -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">👩🏻</span>
-                <div>
-                  <div class="text-sm text-gray-500">Họ & Tên Mẹ</div>
-                  <div class="text-lg font-semibold" id="tenMeText">Trần Thị C</div>
-                </div>
-              </div>
-              <button onclick="editField('tenMe')">✏️</button>
-            </div>
-
-            <!-- SỐ ĐIỆN THOẠI -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">📞</span>
-                <div>
-                  <div class="text-sm text-gray-500">Số điện thoại</div>
-                  <div class="text-lg font-semibold" id="sdtText">0123 456 789</div>
-                </div>
-              </div>
-              <button onclick="editField('sdt')">✏️</button>
-            </div>
-
-            <!-- GIÁO XÓM -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">🏠</span>
-                <div>
-                  <div class="text-sm text-gray-500">Giáo Xóm</div>
-                  <div class="text-lg font-semibold" id="giaoXomText">Xóm Gò</div>
-                </div>
-              </div>
-              <button onclick="editField('giaoXom')">✏️</button>
-            </div>
-
-            <!-- GIỚI TÍNH -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">⚧️</span>
-                <div>
-                  <div class="text-sm text-gray-500">Giới tính</div>
-                  <div class="text-lg font-semibold" id="gioiTinhText">Nam</div>
-                </div>
-              </div>
-              <button onclick="editField('gioiTinh')" class="text-orange-500 hover:text-orange-600">
-                ✏️
-              </button>
-            </div>
-
-            <!-- USER NAME -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">🆔</span>
-                <div>
-                  <div class="text-sm text-gray-500">Username</div>
-                  <div class="text-lg font-semibold" id="usernameText">admin</div>
-                </div>
-              </div>
-              <!-- LOGOUT -->
-              <button
-                onclick="logout()"
-                class="text-sm px-4 py-2 rounded-lg bg-red-100 text-red-600 hover:bg-red-200 transition"
-              >
-                Logout
-              </button>
-            </div>
-
-            <!-- PASSWORD -->
-            <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4">
-              <div class="flex items-center gap-4">
-                <span class="text-2xl">🔒</span>
-                <div>
-                  <div class="text-sm text-gray-500">Mật khẩu</div>
-                  <div class="text-lg font-semibold" id="passwordText">••••••••</div>
-                  
-                </div>
-              </div>
-              <button
-                class="text-sm text-orange-600 font-semibold hover:underline"
-                onclick="openChangePassword()"
-              >
-                Đổi
-              </button>
-            </div>
-            <!-- SAVE BUTTON -->
-            <div class="flex justify-end mt-6">
-              <button
-                id="btnSaveProfile"
-                onclick="openConfirmSave()"
-                class="px-6 py-2 rounded-xl bg-orange-500 text-white font-semibold
-                       hover:bg-orange-600 active:scale-95 transition
-                       disabled:bg-gray-300 disabled:cursor-not-allowed"
-              >
-                💾 Lưu thay đổi
-              </button>
-            </div>
-            
-          </div>
-          <div id="achievement" class="hidden"></div>
-        </div>
+        
       </div>
 
       <!-- TABBAR -->
@@ -439,7 +189,7 @@
         <div class="footer-container">
           <!-- Logo & Info -->
           <div class="footer-logo">
-            <img src="photo/logo.jpg" alt="Giáo xứ An Ngãi" />
+            <img src="https://lh3.googleusercontent.com/d/1oiEnPzSGOiliggoiteJR4N2lfjdw4lLE" alt="Giáo xứ An Ngãi" />
             <h3>Giáo xứ An Ngãi</h3>
             <p>Email: contact@example.com</p>
             <p>SĐT: 0123 456 789</p>
