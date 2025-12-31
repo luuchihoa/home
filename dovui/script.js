@@ -225,8 +225,7 @@ function handleTimeout() {
 // ====================== LOAD CÂU HỎI =========================
 function loadQuestion() {
   questionLocked = false;
-  quizBox1.style.display='none';
-  quizBox.style.display='block';
+  
   if (!quizQuestions || quizQuestions.length === 0) {
     quizContentFallback();
     return;
@@ -312,8 +311,8 @@ function showResults() {
   quizEnded = true;
   playSound(winSound);
   
-  quizBox.style.display='none';
-  quizBox1.style.display='block';
+  quizBox?.classList.add("hidden");
+  quizBox1?.classList.remove("hidden");
   const score = ((scoreChoice / quizQuestions.length) * 10).toFixed(1);
   finishArea.innerHTML = `
     <h2 class="text-3xl text-center text-green-600 font-bold mb-4">Hoàn thành bài thi!</h2>
@@ -337,7 +336,8 @@ function startQuiz() {
   document.getElementById('start-box').style.display = 'none';
   document.getElementById('loading-box').style.display = 'none';
   document.getElementById('thanhgia')?.classList?.remove('hidden');
-  quizBox.style.display = 'block';
+  quizBox?.classList.remove("hidden");
+  quizBox1?.classList.add("hidden");
   
   quizEnded = false; // ✅ reset cờ
   totalTime = config.time;
