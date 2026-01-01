@@ -254,7 +254,7 @@ function loadQuestion() {
   const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
 
   quizContent.querySelectorAll(".option").forEach(opt => {
-    if (!isMobile) {
+    if (isMobile) {
       opt.addEventListener('mouseenter', () => {
         playSoundSafe(hoverSound);
       });
