@@ -161,6 +161,7 @@ function startTimerSmooth() {
   const start = performance.now();
   let warned = false;
 
+  lastSecond = null;
   // ✅ reset trạng thái
   bar.style.width = "0%";
   bar.classList.remove('time-warning', 'time-danger');
@@ -240,9 +241,6 @@ function handleTimeout() {
 
 // ====================== LOAD CÂU HỎI =========================
 function loadQuestion() {
-  questionLocked = false;
-  lastSecond = null;
-  
   if (!quizQuestions || quizQuestions.length === 0) {
     quizContentFallback();
     return;
