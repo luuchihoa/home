@@ -25,7 +25,6 @@ window.totalTime = 0;
 window.quizEnded = false;
 window.timerRAF = null;
 window.questionLocked = false;
-window.lastSecond = null;
 // ====================== Init-Quiz =========================
 window.initQuiz = async function (type) {
   // ===== Lấy root =====
@@ -161,7 +160,7 @@ function startTimerSmooth() {
   const start = performance.now();
   let warned = false;
 
-  lastSecond = null;
+  let lastSecond = null;
   // ✅ reset trạng thái
   bar.style.width = "0%";
   bar.classList.remove('time-warning', 'time-danger');
