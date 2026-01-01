@@ -95,11 +95,17 @@ function unlockAudio() {
 
   [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound1, tickSound2]
     .forEach(a => {
-      const s = a.cloneNode();
-      s.volume = 0;
-      s.play().then(() => s.pause()).catch(()=>{});
+      try {
+        a.muted = true;        // 🔒 khóa tiếng hệ thống
+        a.play().then(() => {
+          a.pause();           // ⏸ dừng ngay
+          a.currentTime = 0;   // 🔁 reset đầu file
+          a.muted = false;     // 🔊 mở lại để dùng sau
+        });
+      } catch (e) {}
     });
 }
+
 // ====================== ÂM THANH 3S CUỐI =========================
 function playFinalRush() {
   playSound(tickSound1, 1.6)
@@ -345,7 +351,7 @@ function quizContentFallback() {
 
 // ====================== START =========================
 function startQuiz() {
-  // unlockAudio();
+  unlockAudio();
   document.getElementById('start-box').style.display = 'none';
   document.getElementById('loading-box').style.display = 'none';
   document.getElementById('thanhgia')?.classList?.remove('hidden');
