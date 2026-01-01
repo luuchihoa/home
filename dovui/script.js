@@ -263,7 +263,7 @@ function loadQuestion() {
     handleAnswer();
   };
   finishBtn.onclick = () => {
-    stopTimmer();
+    stopTimer();
     showResults();
   }
   // start per-question timer
