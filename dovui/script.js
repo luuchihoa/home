@@ -109,7 +109,7 @@ function playFinalRush() {
 
   setTimeout(() => {
     playSound(tickSound, 1.8)
-  }, 120);
+  }, 350);
 }
 
 function onTimeUp() {
