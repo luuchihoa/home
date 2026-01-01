@@ -124,10 +124,12 @@ function onTimeUp() {
 
 function playSound(audio, rate = 1) {
   if (!audio) return;
-  audio.pause();
-  audio.currentTime = 0;
-  audio.playbackRate = rate;
-  audio.play();
+
+  const sound = audio.cloneNode(); // 🔥 tạo instance mới
+  sound.playbackRate = rate;
+  sound.volume = audio.volume;
+
+  sound.play().catch(() => {});
 }
 
 function stopTimer() {
