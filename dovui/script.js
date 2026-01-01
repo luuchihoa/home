@@ -109,9 +109,10 @@ function unlockAudio() {
 function playFinalRush() {
   playSound(tickSound1, 1.6)
 
-  // setTimeout(() => {
-  //   playSound(tickSound2, 1.8)
-  // }, 350);
+  setTimeout(() => {
+    playSound(tickSound2, 1.8)
+    console.log("run!");
+  }, 350);
 }
 
 function playSound(audio, rate = 1) {
@@ -161,6 +162,7 @@ function startTimerSmooth() {
   let warned = false;
 
   let lastSecond = null;
+  console.log("Last 1: ",lastSecond);
   // ✅ reset trạng thái
   bar.style.width = "0%";
   bar.classList.remove('time-warning', 'time-danger');
@@ -183,6 +185,7 @@ function startTimerSmooth() {
       if (sec !== lastSecond && sec > 0) {
         lastSecond = sec;
         playFinalRush();
+        console.log("Last 2: ",lastSecond);
       }
     }
 
