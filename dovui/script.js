@@ -4,9 +4,11 @@ window.selectSound = window.selectSound || new Audio('https://luuchihoa.github.i
 window.hoverSound  = window.hoverSound  || new Audio('https://luuchihoa.github.io/sound/hover.mp3');
 window.wrongSound  = window.wrongSound  || new Audio('https://luuchihoa.github.io/sound/buzzer.mp3');
 window.correctSound= window.correctSound|| new Audio('https://luuchihoa.github.io/sound/ding.mp3');
-window.tickSound   = window.tickSound   || new Audio('https://luuchihoa.github.io/sound/tick.wav');
+window.tickSound1   = window.tickSound1   || new Audio('https://luuchihoa.github.io/sound/tick.wav');
+window.tickSound2   = window.tickSound2   || new Audio('https://luuchihoa.github.io/sound/tick.wav');
 
-tickSound.volume = 0.7;
+tickSound1.volume = 0.7;
+tickSound2.volume = 0.7;
 winSound.volume = 0.35;
 selectSound.volume = 0.4;
 wrongSound.volume = 0.4;
@@ -63,23 +65,6 @@ window.initQuiz = async function (type) {
   const titleEl = document.getElementById('quiz-title');
   if (titleEl) titleEl.textContent = config.title;
 };
-window.audioUnlocked = false;
-function unlockAudio() {
-  if (audioUnlocked) return;
-  audioUnlocked = true;
-  [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound]
-    .forEach(a => {
-      try {
-        a.muted = true;
-        a.play().then(() => {
-          a.pause();
-          a.currentTime = 0;
-          a.muted = false;
-        });
-      } catch (e) {}
-    });
-}
-
 // ====================== LOAD DATA =========================
 async function loadData() {
   document.title = config.title;
@@ -103,12 +88,24 @@ async function loadData() {
   }
 };
 
+window.audioUnlocked = false;
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+
+  [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound1, tickSound2]
+    .forEach(a => {
+      const s = a.cloneNode();
+      s.volume = 0;
+      s.play().then(() => s.pause()).catch(()=>{});
+    });
+}
 // ====================== ÂM THANH 3S CUỐI =========================
 function playFinalRush() {
-  playSound(tickSound, 1.6)
+  playSound(tickSound1, 1.6)
 
   setTimeout(() => {
-    playSound(tickSound, 1.8)
+    playSound(tickSound2, 1.8)
   }, 350);
 }
 
@@ -120,12 +117,12 @@ function onTimeUp() {
 
 function playSound(audio, rate = 1) {
   if (!audio) return;
-
-  const sound = audio.cloneNode(); // 🔥 tạo instance mới
-  sound.playbackRate = rate;
-  sound.volume = audio.volume;
-
-  sound.play().catch(() => {});
+  try {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.playbackRate = rate;
+    audio.play().catch(()=>{});
+  } catch {}
 }
 
 function stopTimer() {
@@ -142,7 +139,7 @@ function lockOptions() {
   });
 }
 
-function lockSkip(ms = 1500) {
+function lockSkip(ms = 900) {
   skipBtn.classList.add('pointer-events-none', 'opacity-50');
   finishBtn.classList.add('pointer-events-none', 'opacity-50');
 
@@ -233,7 +230,9 @@ function randomQuestion() {
 
 // called when per-question time runs out
 function handleTimeout() {
-  playSound(wrongSound);
+  // playSound(wrongSound);
+  wrongSound.play();
+  wrongSound.currentTime = 0;
   pushUnansweredAndNext();
 }
 
@@ -261,14 +260,14 @@ function loadQuestion() {
     })
     .join('');
   // attach events
-  window.isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-
+  const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
   document.querySelectorAll('.option').forEach(opt => {
     if (!isMobile) {
       opt.addEventListener('mouseenter', () => {
         playSound(hoverSound);
       });
     }
+
     opt.addEventListener('click', () => {
       if (questionLocked) return; // ✅ chặn click trễ
       questionLocked = true;
@@ -309,7 +308,7 @@ function handleAnswer(selectedKey=null) {
   lockOptions();
   lockSkip();
   stopTimer();
-  setTimeout(nextQuestion, 1500);
+  setTimeout(nextQuestion, 1200);
 }
 
 // ====================== NEXT QUESTION =========================
@@ -350,13 +349,13 @@ function quizContentFallback() {
 
 // ====================== START =========================
 function startQuiz() {
+  unlockAudio();
   document.getElementById('start-box').style.display = 'none';
   document.getElementById('loading-box').style.display = 'none';
   document.getElementById('thanhgia')?.classList?.remove('hidden');
   quizBox?.classList.remove("hidden");
   quizBox1?.classList.add("hidden");
   
-  // unlockAudio();
   quizEnded = false; // ✅ reset cờ
   totalTime = config.time;
   current = 0;
