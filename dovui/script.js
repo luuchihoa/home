@@ -300,9 +300,7 @@ function handleAnswer(selectedKey=null) {
 
   if (selectedKey === q.correct) {
     scoreChoice++;
-    // playSound(correctSound);
-    correctSound.currentTime =  0;
-    correctSound.play();
+    playSound(correctSound);
   } else {
     playSound(wrongSound);
   }
