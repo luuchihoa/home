@@ -122,12 +122,10 @@ function onTimeUp() {
 
 function playSound(audio, rate = 1) {
   if (!audio) return;
-  try {
-    audio.pause();
-    audio.currentTime = 0;
-    audio.playbackRate = rate;
-    audio.play().catch(()=>{});
-  } catch {}
+  audio.pause();
+  audio.currentTime = 0;
+  audio.playbackRate = rate;
+  audio.play();
 }
 
 function stopTimer() {
@@ -309,7 +307,7 @@ function handleAnswer(selectedKey=null) {
   lockOptions();
   lockSkip();
   stopTimer();
-  setTimeout(nextQuestion, 1200);
+  setTimeout(nextQuestion, 1500);
 }
 
 // ====================== NEXT QUESTION =========================
