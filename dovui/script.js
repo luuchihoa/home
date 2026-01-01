@@ -112,23 +112,23 @@ function playFinalRush() {
 
   setTimeout(() => {
     playSound(tickSound2, 1.8)
-  }, 500);
+  }, 350);
+}
+
+function playSound(audio, rate = 1) {
+  if (!audio) return;
+
+  audio.pause();
+  audio.currentTime = 0;
+  audio.playbackRate = rate;
+
+  audio.play().catch(() => {});
 }
 
 function onTimeUp() {
   if (questionLocked) return;
   questionLocked = true;
   handleAnswer();
-}
-
-function playSound(audio, rate = 1) {
-  if (!audio) return;
-
-  const sound = audio.cloneNode(); // 🔥 tạo instance mới
-  sound.playbackRate = rate;
-  sound.volume = audio.volume;
-
-  sound.play().catch(() => {});
 }
 
 function stopTimer() {
