@@ -241,6 +241,7 @@ function handleTimeout() {
 // ====================== LOAD CÂU HỎI =========================
 function loadQuestion() {
   questionLocked = false;
+  lastSecond = null;
   
   if (!quizQuestions || quizQuestions.length === 0) {
     quizContentFallback();
