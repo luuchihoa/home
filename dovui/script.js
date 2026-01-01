@@ -120,10 +120,12 @@ function onTimeUp() {
   handleAnswer();
 }
 
-function playSound(audio) {
+function playSound(audio, rate = 1) {
   if (!audio) return;
   try {
+    audio.pause();
     audio.currentTime = 0;
+    audio.playbackRate = rate;
     audio.play().catch(()=>{});
   } catch {}
 }
