@@ -117,12 +117,12 @@ function onTimeUp() {
 
 function playSound(audio, rate = 1) {
   if (!audio) return;
-  try {
-    audio.pause();
-    audio.currentTime = 0;
-    audio.playbackRate = rate;
-    audio.play().catch(()=>{});
-  } catch {}
+
+  const sound = audio.cloneNode(); // 🔥 tạo instance mới
+  sound.playbackRate = rate;
+  sound.volume = audio.volume;
+
+  sound.play().catch(() => {});
 }
 
 function stopTimer() {
@@ -230,9 +230,7 @@ function randomQuestion() {
 
 // called when per-question time runs out
 function handleTimeout() {
-  // playSound(wrongSound);
-  wrongSound.play();
-  wrongSound.currentTime = 0;
+  playSound(wrongSound);
   pushUnansweredAndNext();
 }
 
