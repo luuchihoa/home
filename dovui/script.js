@@ -106,7 +106,7 @@ function playFinalRush() {
 
   setTimeout(() => {
     playSound(tickSound2, 1.8)
-  }, 300);
+  }, 350);
 }
 
 function onTimeUp() {
