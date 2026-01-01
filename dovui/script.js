@@ -94,27 +94,25 @@ function unlockAudio() {
 
   [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound1, tickSound2]
     .forEach(a => {
-      try {
-        a.muted = true;        // 🔒 khóa tiếng hệ thống
-        a.play().then(() => {
-          a.pause();           // ⏸ dừng ngay
-          a.currentTime = 0;   // 🔁 reset đầu file
-          a.muted = false;     // 🔊 mở lại để dùng sau
-        });
-      } catch (e) {}
+      const s = a.cloneNode();
+      s.volume = 0;
+      s.play().then(() => s.pause()).catch(()=>{});
     });
 }
-
 // ====================== ÂM THANH 3S CUỐI =========================
 function playFinalRush() {
   playSound(tickSound1, 1.6)
 
   setTimeout(() => {
     playSound(tickSound2, 1.8)
-    console.log("run!");
   }, 350);
 }
 
+function onTimeUp() {
+  if (questionLocked) return;
+  questionLocked = true;
+  handleAnswer();
+}
 function playSound(audio, rate = 1) {
   if (!audio) return;
 
@@ -124,12 +122,15 @@ function playSound(audio, rate = 1) {
 
   audio.play().catch(() => {});
 }
+// function playSound(audio, rate = 1) {
+//   if (!audio) return;
 
-function onTimeUp() {
-  if (questionLocked) return;
-  questionLocked = true;
-  handleAnswer();
-}
+//   const sound = audio.cloneNode(); // 🔥 tạo instance mới
+//   sound.playbackRate = rate;
+//   sound.volume = audio.volume;
+
+//   sound.play().catch(() => {});
+// }
 
 function stopTimer() {
   if (timerRAF !== null) {
@@ -161,12 +162,13 @@ function startTimerSmooth() {
   const start = performance.now();
   let warned = false;
 
-  let lastSecond = null;
-  console.log("Last 1: ",lastSecond);
   // ✅ reset trạng thái
   bar.style.width = "0%";
   bar.classList.remove('time-warning', 'time-danger');
   bar.classList.add('time-normal');
+
+  let lastSecond = null;
+  console.log('lastSecond: ',lastSecond);
 
   function animate(now) {
     const elapsed = now - start;
@@ -182,10 +184,10 @@ function startTimerSmooth() {
     }
     if (remaining <= 3000) {
       const sec = Math.ceil(remaining / 1000); // 3,2,1,0
-      if (sec !== lastSecond && sec > 0) {
+      if (sec !== lastSecond && sec>0) {
         lastSecond = sec;
         playFinalRush();
-        console.log("Last 2: ",lastSecond);
+        console.log('Last Second: ',lastSecond);
       }
     }
 
@@ -243,6 +245,8 @@ function handleTimeout() {
 
 // ====================== LOAD CÂU HỎI =========================
 function loadQuestion() {
+  questionLocked = false;
+  
   if (!quizQuestions || quizQuestions.length === 0) {
     quizContentFallback();
     return;
