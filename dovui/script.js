@@ -146,7 +146,7 @@ function lockOptions() {
   });
 }
 
-function lockSkip(ms = 900) {
+function lockSkip(ms = 1500) {
   skipBtn.classList.add('pointer-events-none', 'opacity-50');
   finishBtn.classList.add('pointer-events-none', 'opacity-50');
 
@@ -361,7 +361,7 @@ function startQuiz() {
   quizBox?.classList.remove("hidden");
   quizBox1?.classList.add("hidden");
   
-  unlockAudio();
+  // unlockAudio();
   quizEnded = false; // ✅ reset cờ
   totalTime = config.time;
   current = 0;
