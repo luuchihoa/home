@@ -109,9 +109,9 @@ function unlockAudio() {
 function playFinalRush() {
   playSound(tickSound1, 1.6)
 
-  setTimeout(() => {
-    playSound(tickSound2, 1.8)
-  }, 350);
+  // setTimeout(() => {
+  //   playSound(tickSound2, 1.8)
+  // }, 350);
 }
 
 function playSound(audio, rate = 1) {
