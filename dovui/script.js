@@ -26,6 +26,7 @@ window.questionLocked = false;
 window.lastSecond = null;
 // ====================== Init-Quiz =========================
 window.initQuiz = async function (type) {
+  unlockAudio();
   // ===== Lấy root =====
   root = document.getElementById("quiz-root");
   if (!root) {
@@ -63,6 +64,20 @@ window.initQuiz = async function (type) {
   const titleEl = document.getElementById('quiz-title');
   if (titleEl) titleEl.textContent = config.title;
 };
+function unlockAudio() {
+  [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound]
+    .forEach(a => {
+      try {
+        a.muted = true;
+        a.play().then(() => {
+          a.pause();
+          a.currentTime = 0;
+          a.muted = false;
+        });
+      } catch (e) {}
+    });
+}
+
 // ====================== LOAD DATA =========================
 async function loadData() {
   document.title = config.title;
