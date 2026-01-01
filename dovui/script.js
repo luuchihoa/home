@@ -293,8 +293,8 @@ function handleAnswer(selectedKey=null) {
   }
   lockOptions();
   lockSkip();
-  setTimeout(nextQuestion, 900);
   stopTimer();
+  setTimeout(nextQuestion, 900);
 }
 
 // ====================== NEXT QUESTION =========================
