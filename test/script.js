@@ -250,11 +250,16 @@ function loadQuestion() {
     </div>
     <button class="skipBtn mt-4 w-full py-3 bg-gray-200 rounded-xl hover:bg-gray-300 font-bold transition">Câu tiếp theo</button>
   `;
+  
+  const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
 
   quizContent.querySelectorAll(".option").forEach(opt => {
-    opt.addEventListener("mouseenter", () => {    
-      playSoundSafe(hoverSound);
-    });
+    if (!isMobile) {
+      opt.addEventListener('mouseenter', () => {
+        playSound(hoverSound);
+      });
+    }
+
     opt.addEventListener("click", () => {
       const selectedKey = opt.dataset.key;
       playSoundSafe(selectSound);
