@@ -265,11 +265,14 @@ function loadQuestion() {
     })
     .join('');
   // attach events
+  window.isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+
   document.querySelectorAll('.option').forEach(opt => {
-    opt.addEventListener('mouseenter', () => 
-    { 
-      playSound(hoverSound);
-    });
+    if (!isMobile) {
+      opt.addEventListener('mouseenter', () => {
+        playSound(hoverSound);
+      });
+    }
     opt.addEventListener('click', () => {
       if (questionLocked) return; // ✅ chặn click trễ
       questionLocked = true;
