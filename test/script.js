@@ -262,7 +262,6 @@ function loadQuestion() {
 
     opt.addEventListener("click", () => {
       const selectedKey = opt.dataset.key;
-      playSoundSafe(selectSound);
       handleAnswer(selectedKey);
     });
   });
@@ -270,7 +269,6 @@ function loadQuestion() {
   window.skipBtn = document.querySelector(".skipBtn");
   skipBtn?.addEventListener("click", () => {
     userAnswers.push({ question: q.text, selected: "Không trả lời", correct: q.correct });
-    playSoundSafe(selectSound);
     handleAnswer();
   });
 }
