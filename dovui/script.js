@@ -276,7 +276,6 @@ function loadQuestion() {
     opt.addEventListener('click', () => {
       if (questionLocked) return; // ✅ chặn click trễ
       questionLocked = true;
-      playSound(selectSound);
       handleAnswer(opt.dataset.key);
     });
   });
