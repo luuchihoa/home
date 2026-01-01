@@ -174,11 +174,9 @@ function startTimerSmooth() {
     }
     if (remaining <= 3000) {
       const sec = Math.ceil(remaining / 1000); // 3,2,1,0
-      if (sec !== lastSecond) {
+      if (sec !== lastSecond && sec > 0) {
         lastSecond = sec;
-        if(sec>0){
-          playFinalRush();
-        }
+        playFinalRush();
       }
     }
 
