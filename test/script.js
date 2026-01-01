@@ -256,7 +256,7 @@ function loadQuestion() {
   quizContent.querySelectorAll(".option").forEach(opt => {
     if (!isMobile) {
       opt.addEventListener('mouseenter', () => {
-        playSound(hoverSound);
+        playSoundSafe(hoverSound);
       });
     }
 
