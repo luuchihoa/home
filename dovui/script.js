@@ -105,14 +105,10 @@ async function loadData() {
 
 // ====================== ÂM THANH 3S CUỐI =========================
 function playFinalRush() {
-  tickSound.currentTime = 0;
-  tickSound.playbackRate = 1.6;
-  tickSound.play();
+  playSound(tickSound, 1.6)
 
   setTimeout(() => {
-    tickSound.currentTime = 0;
-    tickSound.playbackRate = 1.8;
-    tickSound.play();
+    playSound(tickSound, 1.8)
   }, 120);
 }
 
