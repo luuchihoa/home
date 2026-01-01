@@ -286,8 +286,8 @@ function handleAnswer(selectedKey=null) {
   if (selectedKey === q.correct) {
     scoreChoice++;
     // playSound(correctSound);
-    correctSound.play();
     correctSound.currentTime =  0;
+    correctSound.play();
   } else {
     playSound(wrongSound);
   }
