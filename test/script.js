@@ -78,17 +78,18 @@ window.examConfig = {
 };
 
 // ====================== Âm thanh =========================
-function playSoundSafe(audio) {
+function playSoundSafe(audio, rate = 1) {
   if (!audio) return;
-  try {
-    audio.currentTime = 0;
-    audio.play().catch(() => {});
-  } catch (e) {}
+
+  const sound = audio.cloneNode(); // 🔥 tạo instance mới
+  sound.playbackRate = rate;
+  sound.volume = audio.volume;
+
+  sound.play().catch(() => {});
 }
 
 // ====================== KHỞI TẠO (gọi từ ngoài sau khi innerHTML) =========================
 window.initQuiz = function (type) {
-  unlockAudio();
   window.examType = type;
   window.config = examConfig[type];
 
@@ -268,18 +269,16 @@ function loadQuestion() {
     handleAnswer();
   });
 }
-
+window.audioUnlocked = false;
 function unlockAudio() {
-  [winSound, selectSound, hoverSound, wrongSound, correctSound]
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+
+  [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound]
     .forEach(a => {
-      try {
-        a.muted = true;
-        a.play().then(() => {
-          a.pause();
-          a.currentTime = 0;
-          a.muted = false;
-        });
-      } catch (e) {}
+      const s = a.cloneNode();
+      s.volume = 0;
+      s.play().then(() => s.pause()).catch(()=>{});
     });
 }
 
@@ -422,6 +421,7 @@ function showResults(choiceScore, essayScore, total) {
 
 // ====================== START QUIZ =========================
 function startQuiz() {
+  unlockAudio();
   document.getElementById("start-box")?.classList?.add("hidden");
   document.querySelector(".quiz-box")?.classList?.remove("hidden");
   document.querySelector(".digital-clock")?.classList?.remove("hidden");
