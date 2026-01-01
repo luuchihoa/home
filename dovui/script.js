@@ -26,7 +26,6 @@ window.questionLocked = false;
 window.lastSecond = null;
 // ====================== Init-Quiz =========================
 window.initQuiz = async function (type) {
-  unlockAudio();
   // ===== Lấy root =====
   root = document.getElementById("quiz-root");
   if (!root) {
@@ -64,7 +63,10 @@ window.initQuiz = async function (type) {
   const titleEl = document.getElementById('quiz-title');
   if (titleEl) titleEl.textContent = config.title;
 };
+window.audioUnlocked = false;
 function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
   [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound]
     .forEach(a => {
       try {
@@ -354,6 +356,7 @@ function startQuiz() {
   quizBox?.classList.remove("hidden");
   quizBox1?.classList.add("hidden");
   
+  unlockAudio();
   quizEnded = false; // ✅ reset cờ
   totalTime = config.time;
   current = 0;
