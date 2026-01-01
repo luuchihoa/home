@@ -307,7 +307,7 @@ function handleAnswer(selectedKey=null) {
   lockOptions();
   lockSkip();
   stopTimer();
-  setTimeout(nextQuestion, 900);
+  setTimeout(nextQuestion, 1200);
 }
 
 // ====================== NEXT QUESTION =========================
