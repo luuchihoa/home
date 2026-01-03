@@ -30,17 +30,26 @@ window.login = async function () {
   }
 };
 window.updateLoginTab = function () {
-  const tabLogin = document.getElementById('tab-login');
+  const tabLogin1 = document.querySelectorAll(".tab-login-1");
+  const tabLogin2 = document.querySelector(".tab-login-2");
   const username = localStorage.getItem("username");
 
-  if (!tabLogin) return;
+  if (!tabLogin1) return;
 
   if (username) {
-    tabLogin.innerHTML = `<span class="icon">👤</span><span class="label">Profile</span>`;
-    tabLogin.onclick = () => toggleUserModal(true);
+    tabLogin1.forEach(el => {
+      el.innerHTML = `<span class="icon h-8 w-8 overflow-hidden rounded-full bg-gray-100 ring-2 ring-orange-300"><img src="${localStorage.avatar||'https://lh3.googleusercontent.com/d/1oiEnPzSGOiliggoiteJR4N2lfjdw4lLE'}"></span><span class="label hidden md:flex">Profile</span>`;
+      el.onclick = () => toggleUserModal(true);
+    });
+    tabLogin2.innerHTML = `<span class="icon">👤</span><span class="label">Profile</span>`;
+    tabLogin2.onclick = () => toggleUserModal(true);
   } else {
-    tabLogin.innerHTML = `<span class="icon">🔐</span><span class="label">Login</span>`;
-    tabLogin.onclick = () => toggleModal(true);
+    tabLogin1.forEach(el => {
+      el.innerHTML = `<span class="icon">🔐</span><span class="label">Login</span>`;
+      el.onclick = () => toggleModal(true);
+    });
+    tabLogin2.innerHTML = `<span class="icon">🔐</span><span class="label">Login</span>`;
+    tabLogin2.onclick = () => toggleModal(true);
   }
 };
 
