@@ -277,7 +277,7 @@ function unlockAudio() {
   if (audioUnlocked) return;
   window.audioUnlocked = true;
   const s = selectSound.cloneNode();
-  s.volume = 0;
+  s.muted = true;
   s.play().then(() => {
     s.pause();
     s.currentTime = 0;
