@@ -144,13 +144,9 @@ input[type='password'] {
   right: 0;
   bottom: 12px;
   margin: 0 auto;
-  display: flex;
   gap: 8px;
   justify-content: space-between;
   align-items: center;
-  width: min(720px, calc(100% - 24px));
-  height: 64px;
-  padding: 8px;
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 0.6),
@@ -211,12 +207,6 @@ body.theme-dark .tabbar {
 
 /* ensure touch targets good on mobile */
 @media (max-width: 420px) {
-  .tabbar {
-    height: 56px;
-    border-radius: 12px;
-    padding: 6px;
-    bottom: 8px;
-  }
   .tab-item {
     font-size: clamp(11px, 3.6vw, 13px);
   }
