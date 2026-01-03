@@ -267,13 +267,14 @@ function loadQuestion() {
     .join('');
   // attach events
   const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-  document.querySelectorAll('.option').forEach(opt => {
-    if (!isMobile) {
-      opt.addEventListener('mouseenter', () => {
-        playSound(hoverSound);
+  setTimeout(() => {
+     if (!isMobile) {
+        options.forEach(opt => {
+            opt.addEventListener('mouseenter', () => playSound(hoverSound));
       });
     }
-
+  }, 200);
+  document.querySelectorAll('.option').forEach(opt => {
     opt.addEventListener('click', () => {
       if (questionLocked) return; // ✅ chặn click trễ
       questionLocked = true;
