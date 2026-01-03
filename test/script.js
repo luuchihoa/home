@@ -277,7 +277,7 @@ function unlockAudio() {
   if (audioUnlocked) return;
   audioUnlocked = true;
 
-  [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound]
+  [winSound, selectSound, hoverSound, wrongSound, correctSound]
     .forEach(a => {
       const s = a.cloneNode();
       s.volume = 0;
