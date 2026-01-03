@@ -91,13 +91,10 @@ window.audioUnlocked = false;
 function unlockAudio() {
   if (audioUnlocked) return;
   audioUnlocked = true;
-
-  [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound1, tickSound2]
-    .forEach(a => {
-      const s = a.cloneNode();
-      s.volume = 0;
-      s.play().then(() => s.pause()).catch(()=>{});
-    });
+  
+  const s = selectSound.cloneNode();
+  s.muted = true;
+  s.play().then(() => s.pause()).catch(()=>{});
 }
 // ====================== ÂM THANH 3S CUỐI =========================
 function playFinalRush() {
