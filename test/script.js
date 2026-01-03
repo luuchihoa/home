@@ -252,6 +252,7 @@ function loadQuestion() {
   `;
   
   const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+  const options = quizContent.querySelectorAll(".option");
   setTimeout(() => {
      if (!isMobile) {
         options.forEach(opt => {
@@ -259,7 +260,7 @@ function loadQuestion() {
         });
     }
   }, 200);
-  quizContent.querySelectorAll(".option").forEach(opt => {
+  options.forEach(opt => {
     opt.addEventListener("click", () => {
       const selectedKey = opt.dataset.key;
       handleAnswer(selectedKey);
