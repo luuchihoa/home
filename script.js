@@ -171,23 +171,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-let lastScrollY = 0;
-const tabbar = document.querySelector('.tabbar');
-
-window.addEventListener('scroll', () => {
-  const currentScroll = window.scrollY;
-
-  if (currentScroll > lastScrollY) {
-    // Cuộn xuống => Ẩn tabbar
-    tabbar.classList.add('hide');
-  } else {
-    // Cuộn lên => Hiện tabbar
-    tabbar.classList.remove('hide');
-  }
-
-  lastScrollY = currentScroll;
-});
-
 (function autoBackground() {
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
   const today = new Date();
