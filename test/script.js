@@ -252,7 +252,7 @@ function loadQuestion() {
   `;
   
   const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-  const options = quizContent.querySelectorAll(".option");
+  const options = document.querySelectorAll('.option');
   setTimeout(() => {
      if (!isMobile) {
         options.forEach(opt => {
