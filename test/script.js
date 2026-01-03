@@ -230,7 +230,6 @@ function createFirework(x, y) {
 
 // ====================== TRẮC NGHIỆM =========================
 function loadQuestion() {
-  unlockAudio();
   if (!quizContent) return;
 
   const q = quizQuestions[current];
@@ -276,14 +275,12 @@ function loadQuestion() {
 window.audioUnlocked = false;
 function unlockAudio() {
   if (audioUnlocked) return;
-  audioUnlocked = true;
-
-  [winSound, selectSound, hoverSound, wrongSound, correctSound]
-    .forEach(a => {
-      const s = a.cloneNode();
-      s.volume = 0;
-      s.play().then(() => s.pause()).catch(()=>{});
-    });
+  window.audioUnlocked = true;
+  const s = selectSound.cloneNode();
+  s.volume = 0;
+  s.play().then(() => {
+      // Optional: pause immediately if needed, but short sounds usually fine
+  }).catch(()=>{});
 }
 
 function handleAnswer(selectedKey) {
@@ -425,6 +422,7 @@ function showResults(choiceScore, essayScore, total) {
 
 // ====================== START QUIZ =========================
 function startQuiz() {
+  unlockAudio();
   document.getElementById("start-box")?.classList?.add("hidden");
   document.querySelector(".quiz-box")?.classList?.remove("hidden");
   document.querySelector(".digital-clock")?.classList?.remove("hidden");
