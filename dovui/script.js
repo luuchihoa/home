@@ -90,14 +90,13 @@ async function loadData() {
 window.audioUnlocked = false;
 function unlockAudio() {
   if (audioUnlocked) return;
-  audioUnlocked = true;
-
-  [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound1, tickSound2]
-    .forEach(a => {
-      const s = a.cloneNode();
-      s.volume = 0;
-      s.play().then(() => s.pause()).catch(()=>{});
-    });
+  window.audioUnlocked = true;
+  const s = selectSound.cloneNode();
+  s.volume = 0;
+  s.play().then(() => {
+    s.pause();
+    s.currentTime = 0;
+  }).catch(()=>{});
 }
 // ====================== ÂM THANH 3S CUỐI =========================
 function playFinalRush() {
@@ -627,7 +626,6 @@ function handleTimeout() {
 
 // ====================== LOAD CÂU HỎI =========================
 function loadQuestion() {
-  unlockAudio();
   questionLocked = false;
   
   if (!quizQuestions || quizQuestions.length === 0) {
@@ -739,6 +737,7 @@ function quizContentFallback() {
 
 // ====================== START =========================
 function startQuiz() {
+  unlockAudio();
   document.getElementById('start-box').style.display = 'none';
   document.getElementById('loading-box').style.display = 'none';
   document.getElementById('thanhgia')?.classList?.remove('hidden');
