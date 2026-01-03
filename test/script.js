@@ -230,6 +230,7 @@ function createFirework(x, y) {
 
 // ====================== TRẮC NGHIỆM =========================
 function loadQuestion() {
+  unlockAudio();
   if (!quizContent) return;
 
   const q = quizQuestions[current];
@@ -424,7 +425,6 @@ function showResults(choiceScore, essayScore, total) {
 
 // ====================== START QUIZ =========================
 function startQuiz() {
-  unlockAudio();
   document.getElementById("start-box")?.classList?.add("hidden");
   document.querySelector(".quiz-box")?.classList?.remove("hidden");
   document.querySelector(".digital-clock")?.classList?.remove("hidden");
