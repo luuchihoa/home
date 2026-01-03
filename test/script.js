@@ -252,14 +252,14 @@ function loadQuestion() {
   `;
   
   const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
-
-  quizContent.querySelectorAll(".option").forEach(opt => {
-    if (!isMobile) {
-      opt.addEventListener('mouseenter', () => {
-        playSoundSafe(hoverSound);
-      });
+  setTimeout(() => {
+     if (!isMobile) {
+        options.forEach(opt => {
+            opt.addEventListener('mouseenter', () => playSoundSafe(hoverSound));
+        });
     }
-
+  }, 200);
+  quizContent.querySelectorAll(".option").forEach(opt => {
     opt.addEventListener("click", () => {
       const selectedKey = opt.dataset.key;
       handleAnswer(selectedKey);
