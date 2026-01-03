@@ -279,7 +279,8 @@ function unlockAudio() {
   const s = selectSound.cloneNode();
   s.volume = 0;
   s.play().then(() => {
-      // Optional: pause immediately if needed, but short sounds usually fine
+    s.pause();
+    s.currentTime = 0;
   }).catch(()=>{});
 }
 
