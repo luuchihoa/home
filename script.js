@@ -131,7 +131,7 @@ function applyFont() {
   const size = parseInt(localStorage.getItem('font-size') || 16);
   document.body.style.fontSize = size + 'px';
   document.querySelectorAll('h1,h2,h3').forEach(el => {
-    el.style.fontSize = size + 6 + 'px';
+    el.style.fontSize = size + 4 + 'px';
   });
   document.querySelectorAll('input, button, .tab-item').forEach(el => {
     el.style.fontSize = size + 'px';
@@ -147,7 +147,6 @@ function autoFont() {
 window.autoFont = autoFont;
 
 applyFont();
-
 
 const modals = [
   { id: 'modal', toggle: toggleModal },
