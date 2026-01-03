@@ -266,6 +266,7 @@ function loadQuestion() {
     .join('');
   // attach events
   const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
+  const options = quizContent.querySelectorAll(".option");
   setTimeout(() => {
      if (!isMobile) {
         options.forEach(opt => {
@@ -273,7 +274,7 @@ function loadQuestion() {
         });
     }
   }, 200);
-  document.querySelectorAll('.option').forEach(opt => {
+  options.forEach(opt => {
     opt.addEventListener('click', () => {
       if (questionLocked) return; // ✅ chặn click trễ
       questionLocked = true;
