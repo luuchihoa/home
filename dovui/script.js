@@ -356,7 +356,6 @@ function quizContentFallback() {
 
 // ====================== START =========================
 function startQuiz() {
-  unlockAudio();
   document.getElementById('start-box').style.display = 'none';
   document.getElementById('loading-box').style.display = 'none';
   document.getElementById('thanhgia')?.classList?.remove('hidden');
