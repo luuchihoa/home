@@ -213,7 +213,6 @@ function getExamType() {
 }
 window.examType = getExamType();
 window.config = examConfig[examType] || examConfig['dovui'];
-totalTime = config.time;
 
 // ====================== RANDOM =========================
 function getRandomItems(arr, n) {
@@ -233,7 +232,8 @@ function handleTimeout() {
 
 // ====================== LOAD CÂU HỎI =========================
 function loadQuestion() {
-  unlockAudio();
+  // start per-question timer
+  startTimerSmooth();
   questionLocked = false;
   
   if (!quizQuestions || quizQuestions.length === 0) {
@@ -280,10 +280,7 @@ function loadQuestion() {
     stopTimer();
     showResults();
   }
-  // start per-question timer
-  startTimerSmooth();
 }
-
 
 // ====================== CHECK ĐÁP ÁN =========================
 function handleAnswer(selectedKey=null) {
@@ -345,20 +342,44 @@ function quizContentFallback() {
   optionsArea.innerHTML = '<p class="text-center text-red-500">Không có câu hỏi để hiển thị.</p>';
 }
 
+function closeGuide() {
+  const skip = document.getElementById("skip-guide").checked;
+  if(document.getElementById('time-bar').style.width === '0%') {
+    loadQuestion();
+  }
+
+  if (skip) {
+    localStorage.setItem("skipGuideDoVui", "1");
+  }
+
+  document.getElementById("guide-box").classList.add("hidden");
+}
+function openGuide() {
+  document.getElementById("guide-box").classList.remove("hidden");
+  document.getElementById("skip-guide").parentElement.classList.add("hidden");
+}
 // ====================== START =========================
 window.startQuiz =function() {
+  unlockAudio();
+  document.getElementById('time-bar').style.width = '0%';
   document.getElementById('start-box').style.display = 'none';
   document.getElementById('loading-box').style.display = 'none';
   document.getElementById('thanhgia')?.classList?.remove('hidden');
   quizBox?.classList.remove("hidden");
   quizBox1?.classList.add("hidden");
   
-  quizEnded = false; // ✅ reset cờ
-  totalTime = config.time;
+  quizEnded = false;
   current = 0;
   scoreChoice = 0;
   randomQuestion();
-  loadQuestion();
+  totalTime = config.time||totalTime;
+  if (localStorage.getItem("skipGuideDoVui") === "1") {
+    document.getElementById("guide-box")?.classList.add("hidden");
+    loadQuestion();
+  } else {
+    document.getElementById("guide-box")?.classList.remove("hidden");
+    document.getElementById("skip-guide").parentElement.classList.remove("hidden");
+  }
 }
 
 openExitModal.onclick = openExitModal;
