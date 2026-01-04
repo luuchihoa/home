@@ -174,16 +174,28 @@
         <!-- Nội dung -->
         <div class="text-left text-white/90 text-sm md:text-base space-y-3 leading-relaxed">
           <p>🔹 Bài thi gồm <b>trắc nghiệm</b> và <b>tự luận</b>.</p>
+          <p>🔹 Mỗi lần thi sẽ chọn <b>ngẫu nhiên</b> câu hỏi từ <b>thư viện.</b></p>
           <p>🔹 Mỗi câu trắc nghiệm chỉ chọn <b>1 đáp án đúng</b>.</p>
           <p>🔹 Có thể <b>bỏ qua</b> câu hỏi và làm tiếp.</p>
           <p>🔹 Hết thời gian hệ thống sẽ <b>tự động nộp bài</b>.</p>
-          <p>🔹 Hãy làm bài <span class="text-orange-500 font-semibold">trung thực và bình tĩnh</span>.</p>
         </div>
 
         <!-- Nút -->
         <div class="mt-8 space-y-3">
+          <!-- Ghi nhớ lựa chọn -->
+          <div class="mt-6 flex items-center justify-center gap-2 text-gray/90 text-sm">
+            <input
+              type="checkbox"
+              id="skip-guide"
+              class="w-4 h-4 accent-orange-500 cursor-pointer"
+            />
+            <label for="skip-guide" class="cursor-pointer select-none">
+              Lần sau không hiển thị
+            </label>
+          </div>
+
           <button
-            onclick="document.getElementById('guide-box').classList.add('hidden')"
+            onclick="closeGuide()"
             class="w-full py-3 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white font-bold rounded-xl shadow-xl transition-all active:scale-95">
             🚀 XÁC NHẬN
           </button>
@@ -231,6 +243,7 @@
 
       <!-- Nội dung quiz -->
       <div id="quiz-content" class="space-y-4"></div>
+      <div class="relative mt-6 mx-auto w-fit">
 
       <div class="digital-clock mt-6 mx-auto w-fit flex items-center gap-3
             px-5 py-3 rounded-full
@@ -244,6 +257,21 @@
           05:00
         </span>
       </div>
+      <!-- Nút ? Hướng dẫn bài làm -->
+      <button
+        onclick="openGuide()"
+        class="absolute -right-12 top-1/2 -translate-y-1/2
+               w-9 h-9 rounded-full
+               bg-orange-500 text-white
+               flex items-center justify-center
+               font-bold shadow-lg
+               hover:bg-orange-600
+               transition active:scale-95"
+        title="Hướng dẫn"
+      >
+        ?
+      </button>
+    </div>
 
     </div>
 
