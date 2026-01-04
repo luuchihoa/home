@@ -243,19 +243,20 @@ function loadQuestion() {
     </div>
     <button class="skipBtn mt-4 w-full py-3 bg-gray-200 rounded-xl hover:bg-gray-300 font-bold transition">Câu tiếp theo</button>
   `;
-  
+
   const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
   const options = document.querySelectorAll('.option');
   setTimeout(() => {
-     if (!isMobile) {
-        options.forEach(opt => {
-            opt.addEventListener('mouseenter', () => playSoundSafe(hoverSound));
-        });
+    if (!isMobile) {
+      options.forEach(opt => {
+        opt.addEventListener('mouseenter', () => playSoundSafe(hoverSound));
+      });
     }
   }, 200);
-  options.forEach(opt => {
+  quizContent.querySelectorAll(".option").forEach(opt => {
     opt.addEventListener("click", () => {
       const selectedKey = opt.dataset.key;
+      playSoundSafe(selectSound);
       handleAnswer(selectedKey);
     });
   });
@@ -263,18 +264,19 @@ function loadQuestion() {
   window.skipBtn = document.querySelector(".skipBtn");
   skipBtn?.addEventListener("click", () => {
     userAnswers.push({ question: q.text, selected: "Không trả lời", correct: q.correct });
+    playSoundSafe(selectSound);
     handleAnswer();
   });
 }
+
 window.audioUnlocked = false;
 function unlockAudio() {
   if (audioUnlocked) return;
   window.audioUnlocked = true;
   const s = selectSound.cloneNode();
-  s.muted = true;
+  s.volume = 0;
   s.play().then(() => {
-    s.pause();
-    s.currentTime = 0;
+      // Optional: pause immediately if needed, but short sounds usually fine
   }).catch(()=>{});
 }
 
@@ -414,7 +416,19 @@ function showResults(choiceScore, essayScore, total) {
   // Send data safely (non-blocking)
   try { sendData(localStorage.username, total); } catch (e) { /* ignore */ }
 }
+function closeGuide() {
+  const skip = document.getElementById("skip-guide").checked;
 
+  if (skip) {
+    localStorage.setItem("skipGuide", "1");
+  }
+
+  document.getElementById("guide-box").classList.add("hidden");
+}
+function openGuide() {
+  document.getElementById("guide-box").classList.remove("hidden");
+  document.getElementById("skip-guide").parentElement.classList.add("hidden");
+}
 // ====================== START QUIZ =========================
 function startQuiz() {
   unlockAudio();
@@ -423,10 +437,13 @@ function startQuiz() {
   document.querySelector(".digital-clock")?.classList?.remove("hidden");
   document.querySelector(".section-title")?.classList?.remove("hidden");
   document.querySelector(".header-quiz")?.classList?.remove("hidden");
-  if(!localStorage.getItem("isRead")) {
-    document.getElementById("guide-box")?.classList?.remove("hidden");
-    localStorage.setItem("isRead",true);
+
+  if (localStorage.getItem("skipGuide") === "1") {
+    document.getElementById("guide-box")?.classList.add("hidden");
+  } else {
+    document.getElementById("guide-box")?.classList.remove("hidden");
   }
+
   quizEnded = false;   // ✅ reset
   totalTime = config.time || totalTime;
   randomQuestion();
