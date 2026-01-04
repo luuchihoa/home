@@ -3,10 +3,8 @@
   class="relative flex flex-col items-center justify-center min-h-screen p-4"
 >
   <!-- Background cố định -->
-  <div
-    class="fixed inset-0 bg-cover bg-center z-0"
-  ></div>  
-  <!-- EXIT MODAL -->
+  <div class="fixed inset-0 bg-cover bg-center z-0"></div>  
+    <!-- EXIT MODAL -->
     <div
       id="exit-modal"
       class="fixed flex inset-0 z-[200] hidden items-center justify-center bg-black/60 backdrop-blur-sm"
@@ -39,132 +37,165 @@
         </div>
       </div>
     </div>
-  <!-- Loading Box -->
-  <div
-      id="loading-box"
-      class="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 animate-fadeIn"
-    >
-      <div
-        class="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-10 max-w-sm w-[85%] text-center shadow-[0_0_30px_rgba(0,255,255,0.4)] animate-scaleIn"
-      >
-        <!-- Loader neon -->
-        <div class="loader-neon mx-auto mb-6"></div>
-
-        <!-- Text -->
-        <p
-          class="text-cyan-200 font-semibold text-xl tracking-wide drop-shadow"
-        >
-          ĐANG TẢI DỮ LIỆU...
-        </p>
-
-        <!-- Sub text -->
-        <p class="text-white/70 text-sm mt-2 italic">
-          Vui lòng đợi trong giây lát
-        </p>
-      </div>
-  </div>
-
-  <!-- Load Error -->
-  <div class="error-box flex items-center justify-center min-h-[300px] z-50 hidden">
-    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center animate-fadeIn">
-      
-      <!-- Icon -->
-      <div class="mx-auto mb-5 flex items-center justify-center w-16 h-16 rounded-full bg-orange-100">
-        <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" stroke-width="2"
-          viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M12 9v3m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z" />
-        </svg>
-      </div>
-
-      <!-- Title -->
-      <h2 class="text-xl font-bold text-orange-500 mb-2">
-        Không thể tải dữ liệu
-      </h2>
-
-      <!-- Description -->
-      <p class="text-gray-500 mb-6 leading-relaxed">
-        Hệ thống không thể kết nối đến máy chủ.<br>
-        Vui lòng kiểm tra kết nối mạng hoặc thử lại sau.
-      </p>
-
-      <!-- Actions -->
-      <div class="flex gap-4">
-        <!-- Retry -->
-        <button
-          onclick="reload()"
-          class="flex-1 py-3 rounded-xl bg-green-400 text-white font-semibold
-                 hover:bg-green-600 active:scale-95 transition">
-          🔄 Thử lại
-        </button>
-
-        <!-- Exit -->
-        <button
-          onclick="confirmExit()"
-          class="flex-1 py-3 rounded-xl bg-red-400 text-white font-semibold
-                 hover:bg-red-600 active:scale-95 transition">
-          ⏹️ Exit
-        </button>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- Overlay mờ -->
-  <div
-    id="start-box"
-    class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-49 animate-fadeIn hidden"
-  >
-    <!-- Box chính -->
+    
+    <!-- Loading Box -->
     <div
-      class="relative bg-white/20 backdrop-blur-xl shadow-2xl border border-white/30 p-10 rounded-3xl max-w-md w-[90%] text-center animate-scaleIn"
-    >
-      <!-- Icon -->
-      <div class="mb-6 flex justify-center">
-        <div class="w-20 h-20 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center shadow-lg animate-pulse">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-10 h-10 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+        id="loading-box"
+        class="fixed inset-0 bg-black/60 backdrop-blur-md flex items-center justify-center z-50 animate-fadeIn"
+      >
+        <div
+          class="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-10 max-w-sm w-[85%] text-center shadow-[0_0_30px_rgba(0,255,255,0.4)] animate-scaleIn"
+        >
+          <!-- Loader neon -->
+          <div class="loader-neon mx-auto mb-6"></div>
+
+          <!-- Text -->
+          <p
+            class="text-cyan-200 font-semibold text-xl tracking-wide drop-shadow"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M13 10V3L4 14h7v7l9-11h-7z"
-            />
+            ĐANG TẢI DỮ LIỆU...
+          </p>
+
+          <!-- Sub text -->
+          <p class="text-white/70 text-sm mt-2 italic">
+            Vui lòng đợi trong giây lát
+          </p>
+        </div>
+    </div>
+
+    <!-- Load Error -->
+    <div class="error-box flex items-center justify-center min-h-[300px] z-50 hidden">
+      <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full text-center animate-fadeIn">
+        
+        <!-- Icon -->
+        <div class="mx-auto mb-5 flex items-center justify-center w-16 h-16 rounded-full bg-orange-100">
+          <svg class="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 9v3m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4c-.77-1.33-2.69-1.33-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z" />
           </svg>
         </div>
+
+        <!-- Title -->
+        <h2 class="text-xl font-bold text-orange-500 mb-2">
+          Không thể tải dữ liệu
+        </h2>
+
+        <!-- Description -->
+        <p class="text-gray-500 mb-6 leading-relaxed">
+          Hệ thống không thể kết nối đến máy chủ.<br>
+          Vui lòng kiểm tra kết nối mạng hoặc thử lại sau.
+        </p>
+
+        <!-- Actions -->
+        <div class="flex gap-4">
+          <!-- Retry -->
+          <button
+            onclick="reload()"
+            class="flex-1 py-3 rounded-xl bg-green-400 text-white font-semibold
+                   hover:bg-green-600 active:scale-95 transition">
+            🔄 Thử lại
+          </button>
+
+          <!-- Exit -->
+          <button
+            onclick="confirmExit()"
+            class="flex-1 py-3 rounded-xl bg-red-400 text-white font-semibold
+                   hover:bg-red-600 active:scale-95 transition">
+            ⏹️ Exit
+          </button>
+        </div>
+
       </div>
+    </div>
+
+    <!-- Overlay mờ -->
+    <div id="start-box" class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-49 animate-fadeIn hidden">
+      <div class="relative bg-white/20 backdrop-blur-xl shadow-2xl border border-white/30 p-10 rounded-3xl max-w-md w-[90%] text-center animate-scaleIn">
+        <!-- Icon -->
+        <div class="mb-6 flex justify-center">
+          <div class="w-20 h-20 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center shadow-lg animate-pulse">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-10 h-10 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              />
+            </svg>
+          </div>
+        </div>
 
         <!-- Tiêu đề -->
         <h2 class="md:text-4xl text-3xl font-extrabold text-white drop-shadow-lg mb-3">
-          Sẵn Sàng Chưa?
+          Sẵn sàng chưa
         </h2>
 
         <!-- Nội dung -->
         <p class="text-white/90 text-lg mb-6 leading-relaxed">
           Nhấn
           <span id="quiz-title" class="font-semibold text-yellow-300">Bắt đầu</span>
-          để tham gia bài ôn bài.<br> <span class="font-semibold text-green-500">Chúc bạn thi thật tốt!</span>
+          để tham gia bài ôn bài.<br> <span class="font-semibold text-green-500">Chúc bạn làm bài thật tốt!</span>
         </p>
 
         <!-- Nút bắt đầu -->
-        <button
-          onclick="startQuiz()"
-          class="w-full py-3 mt-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-bold rounded-xl shadow-xl transition-all active:scale-95"
-        >
+        <button onclick="startQuiz()" class="w-full py-3 mt-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-bold rounded-xl shadow-xl transition-all active:scale-95">
           BẮT ĐẦU NGAY
         </button>
+      </div>
+    </div>
+    
+    <!-- BẢNG HƯỚNG DẪN LÀM BÀI -->
+    <div id="guide-box"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm hidden animate-fadeIn">
+
+      <div
+        class="relative bg-green-100/80 backdrop-blur-xl shadow-2xl border border-white/30 p-8 md:p-10 rounded-3xl max-w-md w-[90%] text-center animate-scaleIn">
+
+        <!-- Icon -->
+        <div class="mb-6 flex justify-center">
+          <div
+            class="w-20 h-20 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center shadow-lg">
+            <span class="text-4xl">📘</span>
+          </div>
+        </div>
+
+        <!-- Tiêu đề -->
+        <h2 class="md:text-3xl text-2xl font-extrabold drop-shadow mb-4">
+          Hướng dẫn làm bài
+        </h2>
+
+        <!-- Nội dung -->
+        <div class="text-left text-white/90 text-sm md:text-base space-y-3 leading-relaxed">
+          <p>🔹 Bài thi gồm <b>trắc nghiệm</b> và <b>tự luận</b>.</p>
+          <p>🔹 Mỗi câu trắc nghiệm chỉ chọn <b>1 đáp án đúng</b>.</p>
+          <p>🔹 Có thể <b>bỏ qua</b> câu hỏi và làm tiếp.</p>
+          <p>🔹 Hết thời gian hệ thống sẽ <b>tự động nộp bài</b>.</p>
+          <p>🔹 Hãy làm bài <span class="text-orange-500 font-semibold">trung thực và bình tĩnh</span>.</p>
+        </div>
+
+        <!-- Nút -->
+        <div class="mt-8 space-y-3">
+          <button
+            onclick="document.getElementById('guide-box').classList.add('hidden')"
+            class="w-full py-3 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-pink-500 hover:to-orange-500 text-white font-bold rounded-xl shadow-xl transition-all active:scale-95">
+            🚀 XÁC NHẬN
+          </button>
+        </div>
+
       </div>
     </div>
 
     <!-- Card Quiz Box -->
     <div
   class="relative
-         w-[95vw] h-[80vh]          /* mobile */
+         w-[95vw] h-[80vh]         /* mobile */
          sm:w-[92vw] sm:h-[90vh]
          md:w-[85vw]
          lg:w-[75vw]
@@ -216,9 +247,7 @@
 
     </div>
 
-    <div
-      class="fixed bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded pointer-events-none"
-    >
+    <div class="fixed bottom-2 right-2 bg-black/80 text-white text-xs px-2 py-1 rounded pointer-events-none">
       Design by: Khối Phụng Vụ Gx An Ngãi
     </div>
   </div>
