@@ -328,7 +328,7 @@ function showEssayPart() {
 function checkEssay() {
   document.querySelector(".section-title")?.classList?.add("hidden");
   document.querySelector(".header-quiz")?.classList?.add("hidden");
-  document.querySelector(".digital-clock")?.classList?.add("hidden");
+  document.querySelector(".digital-clock").parentElement?.classList?.add("hidden");
 
   let totalEssayScore = 0;
   essayQuizQuestions.forEach((q, i) => {
@@ -419,7 +419,6 @@ function showResults(choiceScore, essayScore, total) {
 function closeGuide() {
   const skip = document.getElementById("skip-guide").checked;
   if(totalTime===config.time) {
-    console.log('run');
     startGlobalTimer();
   }
 
@@ -438,24 +437,25 @@ function startQuiz() {
   unlockAudio();
   document.getElementById("start-box")?.classList?.add("hidden");
   document.querySelector(".quiz-box")?.classList?.remove("hidden");
-  document.querySelector(".digital-clock")?.classList?.remove("hidden");
+  document.querySelector(".digital-clock").parentElement?.classList?.remove("hidden");
   document.querySelector(".section-title")?.classList?.remove("hidden");
   document.querySelector(".header-quiz")?.classList?.remove("hidden");
 
-
-  quizEnded = false;   // ✅ reset
   totalTime = config.time || totalTime;
-  randomQuestion();
-  current = 0;
-  scoreChoice = 0;
-  userAnswers = [];
-  loadQuestion();
   if (localStorage.getItem("skipGuide") === "1") {
     document.getElementById("guide-box")?.classList.add("hidden");
     startGlobalTimer();
   } else {
     document.getElementById("guide-box")?.classList.remove("hidden");
+    document.getElementById("skip-guide").parentElement.classList.remove("hidden");
   }
+
+  quizEnded = false;   // ✅ reset
+  randomQuestion();
+  current = 0;
+  scoreChoice = 0;
+  userAnswers = [];
+  loadQuestion();
 }
 
 // ====================== SEND DATA =========================
