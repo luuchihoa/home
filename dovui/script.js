@@ -91,10 +91,13 @@ window.audioUnlocked = false;
 function unlockAudio() {
   if (audioUnlocked) return;
   audioUnlocked = true;
-  
-  const s = selectSound.cloneNode();
-  s.muted = true;
-  s.play().then(() => s.pause()).catch(()=>{});
+
+  [winSound, selectSound, hoverSound, wrongSound, correctSound, tickSound1, tickSound2]
+    .forEach(a => {
+      const s = a.cloneNode();
+      s.volume = 0;
+      s.play().then(() => s.pause()).catch(()=>{});
+    });
 }
 // ====================== ÂM THANH 3S CUỐI =========================
 function playFinalRush() {
@@ -119,16 +122,6 @@ function playSound(audio, rate = 1) {
 
   audio.play().catch(() => {});
 }
-// function playSound(audio, rate = 1) {
-//   if (!audio) return;
-
-//   const sound = audio.cloneNode(); // 🔥 tạo instance mới
-//   sound.playbackRate = rate;
-//   sound.volume = audio.volume;
-
-//   sound.play().catch(() => {});
-// }
-
 function stopTimer() {
   if (timerRAF !== null) {
     cancelAnimationFrame(timerRAF);
@@ -165,7 +158,6 @@ function startTimerSmooth() {
   bar.classList.add('time-normal');
 
   let lastSecond = null;
-  console.log('lastSecond: ',lastSecond);
 
   function animate(now) {
     const elapsed = now - start;
@@ -184,7 +176,6 @@ function startTimerSmooth() {
       if (sec !== lastSecond && sec>0) {
         lastSecond = sec;
         playFinalRush();
-        console.log('Last Second: ',lastSecond);
       }
     }
 
@@ -268,13 +259,13 @@ function loadQuestion() {
   const isMobile = /Android|iPhone|iPad/i.test(navigator.userAgent);
   const options = document.querySelectorAll('.option');
   setTimeout(() => {
-     if (!isMobile) {
-        options.forEach(opt => {
-            opt.addEventListener('mouseenter', () => playSound(hoverSound));
-        });
+    if (!isMobile) {
+      options.forEach(opt => {
+        opt.addEventListener('mouseenter', () => playSound(hoverSound));
+      });
     }
   }, 200);
-  options.forEach(opt => {
+  document.querySelectorAll('.option').forEach(opt => {
     opt.addEventListener('click', () => {
       if (questionLocked) return; // ✅ chặn click trễ
       questionLocked = true;
@@ -355,7 +346,7 @@ function quizContentFallback() {
 }
 
 // ====================== START =========================
-function startQuiz() {
+window.startQuiz =function() {
   document.getElementById('start-box').style.display = 'none';
   document.getElementById('loading-box').style.display = 'none';
   document.getElementById('thanhgia')?.classList?.remove('hidden');
@@ -369,8 +360,6 @@ function startQuiz() {
   randomQuestion();
   loadQuestion();
 }
-
-window.startQuiz = startQuiz;
 
 openExitModal.onclick = openExitModal;
 
@@ -395,3 +384,51 @@ function error() {
     document.querySelector(".error-box")?.classList?.remove("hidden");
   }, 3000);
 }
+window.resetQuizState = function () {
+  // ===== DỪNG TIMER CÂU HỎI (RAF) =====
+  if (timerRAF !== null) {
+    cancelAnimationFrame(timerRAF);
+    timerRAF = null;
+  }
+
+  // ===== RESET TRẠNG THÁI QUIZ =====
+  quizEnded = false;
+  questionLocked = false;
+
+  current = 0;
+  scoreChoice = 0;
+  totalTime = config?.time || 0;
+
+  quizQuestions = [];
+
+  // ===== RESET UI OPTION =====
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.classList.remove('correct', 'wrong', 'opacity-70', 'pointer-events-none');
+    opt.style.pointerEvents = '';
+  });
+
+  // ===== RESET TIME BAR =====
+  const bar = document.getElementById('time-bar');
+  if (bar) {
+    bar.style.width = '0%';
+    bar.classList.remove('time-warning', 'time-danger');
+    bar.classList.add('time-normal');
+  }
+
+  // ===== RESET ÂM THANH ĐANG PHÁT =====
+  [
+    winSound,
+    selectSound,
+    hoverSound,
+    wrongSound,
+    correctSound,
+    tickSound1,
+    tickSound2
+  ].forEach(a => {
+    if (!a) return;
+    a.pause();
+    a.currentTime = 0;
+  });
+
+  console.log('✅ Quiz state đã được reset hoàn toàn');
+};
