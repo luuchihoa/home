@@ -418,6 +418,10 @@ function showResults(choiceScore, essayScore, total) {
 }
 function closeGuide() {
   const skip = document.getElementById("skip-guide").checked;
+  if(totalTime===config.time) {
+    console.log('run');
+    startGlobalTimer();
+  }
 
   if (skip) {
     localStorage.setItem("skipGuide", "1");
@@ -438,11 +442,6 @@ function startQuiz() {
   document.querySelector(".section-title")?.classList?.remove("hidden");
   document.querySelector(".header-quiz")?.classList?.remove("hidden");
 
-  if (localStorage.getItem("skipGuide") === "1") {
-    document.getElementById("guide-box")?.classList.add("hidden");
-  } else {
-    document.getElementById("guide-box")?.classList.remove("hidden");
-  }
 
   quizEnded = false;   // ✅ reset
   totalTime = config.time || totalTime;
@@ -451,7 +450,12 @@ function startQuiz() {
   scoreChoice = 0;
   userAnswers = [];
   loadQuestion();
-  startGlobalTimer();
+  if (localStorage.getItem("skipGuide") === "1") {
+    document.getElementById("guide-box")?.classList.add("hidden");
+    startGlobalTimer();
+  } else {
+    document.getElementById("guide-box")?.classList.remove("hidden");
+  }
 }
 
 // ====================== SEND DATA =========================
