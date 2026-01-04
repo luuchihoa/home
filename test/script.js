@@ -423,6 +423,10 @@ function startQuiz() {
   document.querySelector(".digital-clock")?.classList?.remove("hidden");
   document.querySelector(".section-title")?.classList?.remove("hidden");
   document.querySelector(".header-quiz")?.classList?.remove("hidden");
+  if(!localStorage.getItem("isRead")) {
+    document.getElementById("guide-box")?.classList?.remove("hidden");
+    localStorage.setItem("isRead",true);
+  }
   quizEnded = false;   // ✅ reset
   totalTime = config.time || totalTime;
   randomQuestion();
