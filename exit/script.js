@@ -1,4 +1,5 @@
 // ====================== NÚT THOÁT =========================
+
 window.isSaveHidden = true;
 window.openExitModal = function() {
   if(!isSaveHidden) {
@@ -18,13 +19,12 @@ window.closeExitModal = function() {
   modal.classList.add('hidden');
 }
 window.confirmExit = function() {
+  resetQuizState();
   unloadQuizCSS();
   loadQuizCSS('style.css');
   cleanupQuizDOM();
-  // dừng timer nếu có
-  stopTimer?.();
   document.body.classList.remove("overflow-hidden");
-  document.getElementById('app')?.classList.remove('hidden');
+  document.getElementById('app')?.classList?.remove("hidden");
   // Xóa HTML cũ
   document.getElementById("quiz-root").innerHTML = "";
 }
