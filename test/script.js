@@ -44,7 +44,7 @@ window.examConfig = {
     title: "ÔN TẬP HỌC KỲ I",
     api: "https://script.google.com/macros/s/AKfycbxgznZnvG0OhZr7p8nFxLAdoXhKMYpZNISmRhAnONoIW3SxYwDDP65olJEB7jN_pCGu/exec",
     time: 2700,
-    mcqCount: 75,
+    mcqCount: 20,
     essayCount: 3
   },
   "15phut-hk2": {
