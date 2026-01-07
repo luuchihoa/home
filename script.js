@@ -257,7 +257,7 @@ function loadPage(id, file, callback) {
     .then(res => res.text())
     .then(html => {
       document.getElementById(id).innerHTML = html;
-      
+      loadScript(id);
       // chạy callback nếu có
       if (typeof callback === "function") {
         callback();
