@@ -55,12 +55,12 @@
     </header>
 
       <!-- Container -->
-      <div class="container">
+      <div class="container mx-auto px-4">
         <!-- pages -->
         <section id="home" class="page active">
           <h1 class="page-title">Trang Chủ</h1>
 
-          <div class="hidden md:grid md:grid-cols-3 gap-8 p-10">
+          <div class="hidden md:grid md:grid-cols-3 md:gap-8 gap-12 p-10">
             <div class="home-card" onclick="openDetail('Khối Kinh Thánh')">
               <div class="home-card-inner">
                 <img src="https://lh3.googleusercontent.com/d/1uA0OxFQ-wIbl39uEIn6wAybWCqpNqutc" alt="Kinh Thánh" />
@@ -84,11 +84,19 @@
                 <p>Chuẩn bị lãnh nhận Bí Tích...</p>
               </div>
             </div>
+
+            <div class="home-card" onclick="openDetail('Tài Liệu')">
+              <div class="home-card-inner">
+                <img src="https://lh3.googleusercontent.com/d/1HD_Lv9paf30NMvMzcaS9P-82Ih_g-vXp" alt="Thêm Sức" />
+                <h3>Tài Liệu Ôn Tập</h3>
+                <p>Tra cứu đáp án & tài liệu.</p>
+              </div>
+            </div>
           </div>
 
           <div class="md:hidden grid grid-cols-1 gap-4">
             <!-- Card 1 -->
-            <div class="group relative overflow-hidden rounded-2xl bg-gray-50 border border-gray-100 transition-all active:scale-[0.98] hover:border-gray-200 hover:shadow-sm cursor-pointer" onclick="openDetail('Khối Kinh Thánh')">
+            <div class="group relative overflow-hidden rounded-2xl border transition-all active:scale-[0.98] cursor-pointer hover:shadow-lg bg-orange-100 border-cyan-100 hover:shadow-cyan-100/50" onclick="openDetail('Khối Kinh Thánh'); ">
               <div class="flex items-center gap-5 p-5 bg-orange-100">
                 <div class="flex-shrink-0 bg-white p-1 rounded-xl shadow-sm border border-gray-100">
                    <img src="https://lh3.googleusercontent.com/d/1uA0OxFQ-wIbl39uEIn6wAybWCqpNqutc" alt="Kinh Thánh" class="h-14 w-14 rounded-xl object-fit">
@@ -104,7 +112,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="group relative overflow-hidden rounded-2xl bg-gray-50 border border-gray-100 transition-all active:scale-[0.98] hover:border-gray-200 hover:shadow-sm cursor-pointer" onclick="openDetail('Khối Phụng Vụ')">
+            <div class="group relative overflow-hidden rounded-2xl border transition-all active:scale-[0.98] cursor-pointer hover:shadow-lg bg-orange-100 border-cyan-100 hover:shadow-cyan-100/50" onclick="openDetail('Khối Phụng Vụ'); ">
               <div class="flex items-center gap-5 p-5 bg-orange-100">
                 <div class="flex-shrink-0 bg-white p-1 rounded-xl shadow-sm border border-gray-100">
                   <img src="https://lh3.googleusercontent.com/d/1sVKWUGTiMvhwoml1qsdmahfLYFML-NGV" alt="Phụng Vụ" class="h-14 w-14 rounded-xl object-contain">
@@ -120,7 +128,7 @@
             </div>
 
             <!-- Card 3 -->
-            <div class="group relative overflow-hidden rounded-2xl bg-gray-50 border border-gray-100 transition-all active:scale-[0.98] hover:border-gray-200 hover:shadow-sm cursor-pointer" onclick="openDetail('Khối Thêm Sức')">
+            <div class="group relative overflow-hidden rounded-2xl border transition-all active:scale-[0.98] cursor-pointer hover:shadow-lg bg-orange-100 border-cyan-100 hover:shadow-cyan-100/50" onclick="openDetail('Khối Thêm Sức'); ">
               <div class="flex items-center gap-5 p-5 bg-orange-100">
                 <div class="flex-shrink-0 bg-white p-1 rounded-xl shadow-sm border border-gray-100">
                   <img src="https://lh3.googleusercontent.com/d/1tnxBqhr_su9_FgK6zdSkLa4h-w7CAlKJ" alt="Thêm Sức" class="h-14 w-14 rounded-xl object-contain">
@@ -134,6 +142,22 @@
                 </div>
               </div>
             </div>
+
+            <!-- Tài liệu -->
+            <div class="group relative overflow-hidden rounded-2xl border transition-all active:scale-[0.98] cursor-pointer hover:shadow-lg bg-orange-100 border-cyan-100 hover:shadow-cyan-100/50" onclick="openDetail('Tài Liệu'); ">
+              <div class="flex items-center gap-5 p-5 bg-orange-100">
+                <div class="flex-shrink-0 bg-white p-1 rounded-xl shadow-sm border border-gray-100">
+                  <img src="https://lh3.googleusercontent.com/d/1HD_Lv9paf30NMvMzcaS9P-82Ih_g-vXp" alt="Thêm Sức" class="h-14 w-14 rounded-xl object-contain">
+                </div>
+                <div>
+                  <h3 class="font-semibold text-gray-900 text-lg mb-1 group-hover:text-orange-600 transition-colors">Tài Liệu Ôn Tập</h3>
+                  <p class="text-xs text-gray-500 leading-relaxed">Tra cứu đáp án & tài liệu</p>
+                </div>
+                <div class="ml-auto text-gray-300 group-hover:text-orange-400 group-hover:translate-x-1 transition-all">
+                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -141,7 +165,7 @@
         <section id="kinhthanh" class="page"></section>
         <section id="phungvu" class="page"></section>
         <section id="themsuc" class="page"></section>
-        <section id="ontap" class="page"></section>
+        <section id="tailieu" class="page"></section>
 
         <section id="contact" class="page">
           <div class="card">
@@ -620,7 +644,6 @@
     <!-- LINK JS -->
     <script src="./login/script.js" defer></script>
     <script src="./script.js" defer></script>
-    <script src="./phungvu/phungvu.js" defer></script>
     <script src="./exit/script.js" defer></script>
   </body>
   
