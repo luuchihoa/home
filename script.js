@@ -43,10 +43,19 @@ window.openDetail = function (name) {
     'Khối Thêm Sức' : 'themsuc',
     'Tài Liệu' : 'tailieu',
   }
-  if(pageMaps[name]){
-    loadPage(pageMaps[name],`./${pageMaps[name]}/${pageMaps[name]}.html`);
-    document.getElementById(pageMaps[name]).classList.add('active');
+  const pageId = pageMaps[name];
+  if (!pageId) return;
+
+  const pageEl = document.getElementById(pageId);
+
+  // 🔑 Nếu DOM đã tồn tại → chỉ show
+  if (pageEl && pageEl.dataset.loaded === "true") {
+    pageEl.classList.add('active');
+    return;
   }
+  loadPage(pageId,`./${pageId}/${pageId}.html`);
+  document.getElementById(pageId).classList.add('active');
+  pageEl.dataset.loaded = "true";
 };
 
 window.toggleModal = function (show) {
