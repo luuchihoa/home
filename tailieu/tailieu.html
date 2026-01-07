@@ -1,0 +1,70 @@
+<!-- DOCUMENT PAGE (MODIFIED) -->
+<section id="documents">
+  <div class="flex flex-col h-full">
+    <!-- Sticky Header: Search & Filters -->
+    <div class="sticky top-0 px-5 z-30 backdrop-blur pt-2 pb-0 border-b mb-4 bg-white/95 border-neutral-100">
+      <!-- Title -->
+        <h1 class="text-2xl font-bold text-neutral-800 mb-3">
+          📚 Tài liệu ôn tập
+        </h1>
+     <!-- Search Bar -->
+     <div class="relative mb-3">
+       <input type="text" id="doc-search" placeholder="Tìm kiếm câu hỏi..." class="w-full pl-10 pr-4 py-2.5 border rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition outline-none placeholder-neutral-400 bg-neutral-50 border-neutral-200">
+       <div class="absolute left-3 top-3 text-neutral-400">
+           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+       </div>
+     </div>
+
+     <!-- Category Filter (Source) - NEW -->
+     <div id="cat-filters" class="flex items-center gap-2 mb-3 overflow-x-auto no-scrollbar">
+       <span class="text-[12px] font-bold uppercase tracking-wider text-neutral-400 shrink-0 mr-1">Bộ đề:</span>
+       <button class="cat-filter px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors bg-neutral-900 text-white shadow-sm" data-cat="all">Tất cả</button>
+       <button class="cat-filter px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors bg-white border border-neutral-200 text-neutral-600 hover:bg-neutral-50" data-cat="15p_hk1">15 Phút</button>
+       <button class="cat-filter px-3 py-1.5 rounded-lg text-sm font-semibold whitespace-nowrap transition-colors bg-white border border-neutral-200 text-neutral-600 hover:bg-neutral-50" data-cat="hk1">Học Kỳ 1</button>
+       <!-- Dropdown -->
+      <select id="cat-select" class="ml-auto px-3 py-1.5 text-sm rounded-lg border border-neutral-200 bg-white text-neutral-700 focus:ring-2 focus:ring-indigo-500">
+        <option value="">Bộ đề khác</option>
+        <option value="15p_hk1">15' - HK1</option>
+        <option value="1tiet_hk1">1Tiết - HK1</option>
+        <option value="hk1">Học kỳ I</option>
+        <option value="15p_hk2">15' - HK2</option>
+        <option value="1tiet_hk2">1Tiết - HK2</option>
+        <option value="hk2">Học kỳ II</option>
+      </select>
+     </div>
+
+     <!-- Type Filter (Format) -->
+     <div class="flex items-center gap-2 mb-3 overflow-x-auto no-scrollbar pb-1 border-t border-dashed border-neutral-100 pt-2">
+       <span class="text-[12px] font-bold uppercase tracking-wider text-neutral-400 shrink-0 mr-1">Dạng:</span>
+       <button class="type-filter active px-3 py-1 rounded-md text-sm font-medium whitespace-nowrap transition-colors bg-indigo-50 text-indigo-700" data-type="all">Tất cả</button>
+       <button class="type-filter px-3 py-1 rounded-md text-sm font-medium whitespace-nowrap transition-colors text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900" data-type="mcq">Trắc nghiệm</button>
+       <button class="type-filter px-3 py-1 rounded-md text-sm font-medium whitespace-nowrap transition-colors text-neutral-500 hover:bg-neutral-50 hover:text-neutral-900" data-type="essay">Tự luận</button>
+     </div>
+    </div>
+
+    <!-- Loading -->
+    <div id="doc-loading" class="flex flex-col items-center justify-center py-20 text-neutral-400">
+      <svg class="animate-spin h-6 w-6 text-orange-500 mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path></svg>
+      <span class="text-xs font-medium">Đang tải dữ liệu...</span>
+    </div>
+
+    <!-- List Content -->
+    <div id="doc-list" class="space-y-4 pb-20 hidden">
+      <!-- Content injected by JS -->
+    </div>
+    <div id="exam-view" class="hidden px-5 pb-20">
+      <div id="exam-loading" class="py-10 text-center text-neutral-400 hidden">
+        Đang tải đề...
+      </div>
+
+      <div id="exam-content"></div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="doc-empty" class="hidden flex flex-col items-center justify-center py-20 text-center">
+      <div class="p-4 rounded-full mb-3 text-2xl bg-neutral-50">🔍</div>
+      <p class="text-sm font-medium text-neutral-900">Không tìm thấy kết quả</p>
+      <p class="text-xs text-neutral-500">Thử thay đổi bộ lọc hoặc từ khóa.</p>
+    </div>
+  </div>
+</section>
