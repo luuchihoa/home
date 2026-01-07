@@ -38,11 +38,6 @@ body {
   transition: background 0.25s, color 0.25s;
   -webkit-font-smoothing: antialiased;
 }
-.container {
-  padding: 16px;
-  max-width: 900px;
-  margin: 0 auto;
-}
 
 h1 {
   margin: 6px 0 14px;
@@ -69,14 +64,12 @@ p {
   background: #02163191;
 }
 /* ========== pages (single page app sections) ========== */
-.page,
-.subpage {
+.page {
   display: none;
   padding-bottom: 20px;
 }
 /* leave space for tabbar */
-.page.active,
-.subpage.active {
+.page.active {
   display: block;
 }
 
@@ -126,7 +119,7 @@ p {
   flex-direction: column;
   gap: 8px;
 }
-input[type='text'],
+/* input[type='text'],
 input[type='password'] {
   width: 100%;
   padding: 12px 14px;
@@ -135,7 +128,7 @@ input[type='password'] {
   background: var(--card);
   color: var(--text);
   font-size: clamp(14px, 1.4vw, 16px);
-}
+} */
 
 /* ========== tabbar (mobile app style fixed bottom) ========== */
 .tabbar {
@@ -147,34 +140,10 @@ input[type='password'] {
   gap: 8px;
   justify-content: space-between;
   align-items: center;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.6),
-    rgba(255, 255, 255, 0.6)
-  );
-  backdrop-filter: blur(8px);
   box-shadow: 0 10px 30px rgba(2, 6, 23, 0.12);
   border-radius: 16px;
   z-index: 998;
   border: 1px solid rgba(15, 23, 36, 0.06);
-}
-.tab-item:hover {
-  color: rgb(218, 64, 21);
-}
-
-/* ensure tabbar color matches theme (slightly card-like) */
-body.theme-dark .tabbar {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.6),
-    rgba(255, 255, 255, 1)
-  );
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-/* Khi ẩn xuống */
-.tabbar.hide {
-  transform: translateY(120%);
 }
 
 .tab-item {
