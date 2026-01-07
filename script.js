@@ -37,16 +37,15 @@ window.switchTabOnProfile = function switchTabOnProfile(tab) {
 window.openDetail = function (name) {
   // Ẩn tất cả page
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-
-  if (name === 'Khối Kinh Thánh') {
-    loadPage('kinhthanh', './kinhthanh/kinhthanh.html');
-    document.getElementById('kinhthanh').classList.add('active');
-  } else if (name === 'Khối Phụng Vụ') {
-    loadPage('phungvu', './phungvu/phungvu.html');
-    document.getElementById('phungvu').classList.add('active');
-  } else if (name === 'Khối Thêm Sức') {
-    loadPage('themsuc', './themsuc/themsuc.html');
-    document.getElementById('themsuc').classList.add('active');
+  const pageMaps = {
+    'Khối Kinh Thánh': 'kinhthanh',
+    'Khối Phụng Vụ' : 'phungvu',
+    'Khối Thêm Sức' : 'themsuc',
+    'Tài Liệu' : 'tailieu',
+  }
+  if(pageMaps[name]){
+    loadPage(pageMaps[name],`./${pageMaps[name]}/${pageMaps[name]}.html`);
+    document.getElementById(pageMaps[name]).classList.add('active');
   }
 };
 
@@ -252,6 +251,7 @@ if(localStorage.getItem('username')){
     updateLoginTab();
   });
 }
+// ======================== LOAD Page =========================
 function loadPage(id, file, callback) {
   fetch(file)
     .then(res => res.text())
@@ -264,7 +264,16 @@ function loadPage(id, file, callback) {
       }
     });
 }
-
+// ======================== LOAD SCRIPT =========================
+function loadScript(pageName, callback) {
+  if(document.querySelector(`script[data-dynamic=${pageName}]`)) return;
+  const s = document.createElement("script");
+  s.src = `./${pageName}/${pageName}.js?t=` + Date.now(); // chống cache
+  s.dataset.dynamic = pageName;
+  s.onload = callback;
+  s.onerror = () => console.error("Không load được script.js");
+  document.body.appendChild(s);
+}
 function lockBodyScroll() {
   document.body.classList.add("overflow-hidden");
 }
