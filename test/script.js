@@ -65,7 +65,7 @@ window.examConfig = {
     title: "ÔN TẬP HỌC KỲ II",
     api: "https://script.google.com/macros/s/AKfycby6EZi44bGG2cQvR_YvdeuAIaKrit6u_KOjxLExzMbsjARTJ6mrZ1eqzQQqnzk_eEme/exec",
     time: 2700,
-    mcqCount: 5,
+    mcqCount: 20,
     essayCount: 3
   },
 };
