@@ -1,10 +1,10 @@
 
 // ======================== LOAD QUIZ PAGE =========================
 function loadQuizPage(type) {
-  let pageName;
-  if (type === 'dovui') {
-    pageName = 'dovui';
-  } else pageName = 'test';
+  const pageName = type === 'dovui' ? 'dovui' : 'test';
+  // if (type === 'dovui') {
+  //   pageName = 'dovui';
+  // } else pageName = 'test';
   const container = document.getElementById("quiz-root");
   window.stopTimer=null;
 
@@ -28,6 +28,7 @@ function loadQuizPage(type) {
           });
       })
       .catch(err => console.error("Load HTML error:", err));
+  console.log(pageName);
 }
 
 // ======================== LOAD SCRIPT =========================
@@ -62,7 +63,6 @@ function unloadQuizCSS(data='quiz') {
 window.unloadQuizCSS = unloadQuizCSS;
 
 window.openPVDetail = function (name) {
-  console.log('Kỳ thi: ',name);
   document.getElementById('app')?.classList?.add('hidden');
   unloadQuizCSS();
   if (name === '15 Phút - HK1') {
