@@ -65,21 +65,16 @@ window.unloadQuizCSS = unloadQuizCSS;
 window.openPVDetail = function (name) {
   document.getElementById('app')?.classList?.add('hidden');
   unloadQuizCSS();
-  if (name === '15 Phút - HK1') {
-    loadQuizPage('15phut-hk1');
-  } else if (name === '1 Tiết - HK1') {
-    loadQuizPage('1tiet-hk1');
-  } else if (name === 'Kỳ I') {
-    loadQuizPage('hocky1');
-  } else if (name === 'Đố Vui') {
-    loadQuizPage('dovui');
-  } else if (name === '15 Phút - HK2') {
-    loadQuizPage('15phut-hk2');
-  } else if (name === '1 Tiết - HK2') {
-    loadQuizPage('1tiet-hk2');
-  } else if (name === 'Kỳ II') {
-    loadQuizPage('hocky2');
-  }
+  const quizMap = {
+    '15 Phút - HK1': '15phut-hk1',
+    '1 Tiết - HK1': '1tiet-hk1',
+    'Kỳ I': 'hocky1',
+    'Đố Vui': 'dovui',
+    '15 Phút - HK2': '15phut-hk2',
+    '1 Tiết - HK2': '1tiet-hk2',
+    'Kỳ II': 'hocky2'
+  };
+  loadQuizPage(quizMap[name]);
 };
 // Lưu các script đã load
 window.loadedScripts = new Set();
