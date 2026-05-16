@@ -62,6 +62,7 @@ function unloadQuizCSS(data='quiz') {
 window.unloadQuizCSS = unloadQuizCSS;
 
 window.openPVDetail = function (name) {
+  console.log('Kỳ thi: ',name);
   document.getElementById('app')?.classList?.add('hidden');
   unloadQuizCSS();
   if (name === '15 Phút - HK1') {
