@@ -2,9 +2,6 @@
 // ======================== LOAD QUIZ PAGE =========================
 function loadQuizPage(type) {
   const pageName = type === 'dovui' ? 'dovui' : 'test';
-  // if (type === 'dovui') {
-  //   pageName = 'dovui';
-  // } else pageName = 'test';
   const container = document.getElementById("quiz-root");
   window.stopTimer=null;
 
@@ -28,7 +25,6 @@ function loadQuizPage(type) {
           });
       })
       .catch(err => console.error("Load HTML error:", err));
-  console.log(pageName);
 }
 
 // ======================== LOAD SCRIPT =========================
